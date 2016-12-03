@@ -51,6 +51,13 @@ app.use('/', require('./controllers/auth'));
 // any routes after this requires authorization
 app.use(isLoggedIn);
 
+app.get('/home', function(req,res) {
+  // db.category.findAll().then(function(categories) {
+    res.render('home');
+    //  {categories:categories});
+  // });
+});
+
 var server = app.listen(process.env.PORT || 3000);
 
 module.exports = server;
