@@ -1,1 +1,211 @@
 <h1>home page after user logs in</h1>
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" style='text-align:center;'>
+    <li role="presentation" class="active col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-3"><a href="#discover" aria-controls="home" role="tab" data-toggle="tab">DISCOVER</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#drops" aria-controls="profile" role="tab" data-toggle="tab">DROPS</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#talk" aria-controls="messages" role="tab" data-toggle="tab">TALK</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#polls" aria-controls="settings" role="tab" data-toggle="tab">POLLS</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <!-- DISCOVER STARTS -->
+    <div role="tabpanel" class="tab-pane active" id="discover">
+      <!-- discover -->
+
+      <div class="container">
+        <div class="row">
+          <% var discovers = result[0] %>
+          <% var minPoll = Math.min(discovers.length, 10) %>
+          <% for (var i = 0; i < minPoll; i++) { %>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail">
+              <img src="<%= discovers[i].productImageUrl %>" alt="...">
+              <div class="caption">
+                <h4><%= discovers[i].name %></h4>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <%= discovers[i].numberOfPurchased %><br>
+                  Purchased
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="">
+        ORNAMENTAL STUFF GOES INSIDE HERE
+      </div>
+    </div>
+    <!-- DISCOVER ENDS -->
+
+    <!-- DROP STARTS -->
+    <div role="tabpanel" class="tab-pane" id="drops">
+
+      <div class="container">
+        <div class="row">
+          <% var drops = result[0] %>
+          <% drops.forEach(function(drop) { %>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail">
+              <img src="<%= drop.productImageUrl %>" alt="...">
+              <div class="caption">
+                <h4><%= drop.name %></h4>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <%= drop.numberOfPurchased %><br>
+                  Purchased
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+
+    </div>
+    <!-- DROP ENDS -->
+
+    <!-- TALK STARTS -->
+    <div role="tabpanel" class="tab-pane" id="talk">
+      talk
+    </div>
+    <!-- TALK ENDS -->
+
+    <!-- POLL STARTS -->
+    <div role="tabpanel" class="tab-pane" id="polls">
+
+      <!-- FOR MD AND SM START-->
+      <% var polls = result[1] %>
+      <% polls.forEach(function(poll) { %>
+      <div class="container hidden-xs poll-div">
+        <!-- product name and by who start -->
+        <div class="col-md-12 col-sm-12">
+          <%= poll.name %>
+        </div>
+        <!-- product name and by who end -->
+        <!-- top voted product image start -->
+        <% var options = poll.options %>
+        <% var minOptionsLength = Math.min(options.length, 3) %>
+        <div class="col-md-3 col-sm-3">
+          <img src="<%= options[0].productImageUrl %>" class="img-responsive"/>
+        </div>
+        <!-- top voted product image end -->
+        <!-- top three voted options start -->
+        <div class="col-md-9 col-sm-9">
+          <div class="col-md-12 col-sm-12">
+            options
+          </div>
+          <% var numberOfOtherOptions = options.length - 3 %>
+          <% var totalVotes = 0 %>
+          <% for (var j = 0; j < minOptionsLength; j++) { %>
+            <% totalVotes += parseInt(options[j].votes) %>
+          <% } %>
+          <% for (var j = 0; j < minOptionsLength; j++) { %>
+          <div class="col-md-12 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+              <div class="col-md-4 col-sm-4">
+                <% var rank = '' %>
+                <% if (j === 0) { %>
+                  <% rank = '1st' %>
+                <% } else if (j === 1) { %>
+                  <% rank = '2nd' %>
+                <% } else { %>
+                  <% rank= '3rd' %>
+                <% } %>
+                <%= rank %>
+              </div>
+              <div class="col-md-8 col-sm-8" style='text-align:right;'>
+                <%= options[j].votes %> Votes
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <%= options[j].name %>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <progress id="progressOptionId<%= options[j].id %>" class="progress progress-info progress-bar-info" value="<%= options[j].votes %>" max="<%= totalVotes %>"></progress>
+            </div>
+          </div>
+          <% } %>
+          <% if (options.length < 4) { %>
+            <% // do nothing %>
+          <% } else { %>
+          <div class="col-md-3 col-sm-3">
+            +<%= numberOfOtherOptions %> OTHER OPTION
+          </div>
+          <% } %>
+        </div>
+        <!-- top three voted options end -->
+      </div>
+      <% }) %>
+      <!-- FOR MD AND SM END-->
+
+
+      <!-- FOR XS START -->
+      <% var pollsXS = result[1] %>
+      <% pollsXS.forEach(function(pollXS) { %>
+
+      <div class="container hidden-md hidden-sm visible-xs poll-div">
+        <div class="col-xs-12">
+          <%= pollXS.name %>
+        </div>
+        <% var optionsXS = pollXS.options %>
+        <% var minOptionsLengthXS = Math.min(optionsXS.length, 3) %>
+
+        <div class="col-xs-12">
+          top voted product image
+          <img src="<%= optionsXS[0].productImageUrl %>" class="img-responsive"/>
+        </div>
+        <div class="col-xs-12">
+          OPTIONS
+        </div>
+        <% var numberOfOtherOptionsXS = optionsXS.length - 3 %>
+        <% var totalVotesXS = 0 %>
+        <% for (var k = 0; k < minOptionsLengthXS; k++) { %>
+          <% totalVotesXS += parseInt(optionsXS[k].votes) %>
+        <% } %>
+        <% for (var k = 0; k < minOptionsLengthXS; k++) { %>
+        <div class="col-xs-12">
+          <div class="col-xs-12">
+            <% var rank = '' %>
+            <% if (k === 0) { %>
+              <% rank = '1st' %>
+            <% } else if (k === 1) { %>
+              <% rank = '2nd' %>
+            <% } else { %>
+              <% rank= '3rd' %>
+            <% } %>
+            <%= rank %>
+          </div>
+          <div class="col-xs-12">
+            <%= optionsXS[k].name %>
+          </div>
+          <div class="col-xs-12">
+            <progress class="progress progress-info progress-bar-info" value="<%= optionsXS[k].votes %>" max="<%= totalVotesXS %>"></progress>
+          </div>
+        </div>
+        <% } %>
+        <% if (optionsXS.length < 4) { %>
+          <% // do nothing %>
+        <% } else { %>
+        <div class="col-xs-12">
+          +<%= numberOfOtherOptionsXS %> OTHER OPTIONS
+        </div>
+        <% } %>
+      </div>
+      <% }) %>
+      <!-- FOR XS END -->
+
+
+
+    </div>
+    <!-- POLL ENDS -->
+  </div>
+
+  <% var categories = result[2] %>
+
+</div>

@@ -1,0 +1,131 @@
+<h1>home page after user logs in</h1>
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" style='text-align:center;'>
+    <li role="presentation" class="active col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-3"><a href="#discover" aria-controls="home" role="tab" data-toggle="tab">DISCOVER</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#drops" aria-controls="profile" role="tab" data-toggle="tab">DROPS</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#talk" aria-controls="messages" role="tab" data-toggle="tab">TALK</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#polls" aria-controls="settings" role="tab" data-toggle="tab">POLLS</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <!-- DISCOVER STARTS -->
+    <div role="tabpanel" class="tab-pane active" id="discover">
+      <!-- discover -->
+
+      <div class="container">
+        <div class="row">
+          <% var discovers = result[0] %>
+          <% var minPoll = Math.min(discovers.length, 10) %>
+          <% for (var i = 0; i < minPoll; i++) { %>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail">
+              <img src="<%= discovers[i].productImageUrl %>" alt="...">
+              <div class="caption">
+                <h4><%= discovers[i].name %></h4>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <%= discovers[i].numberOfPurchased %><br>
+                  Purchased
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="">
+        ORNAMENTAL STUFF GOES INSIDE HERE
+      </div>
+    </div>
+    <!-- DISCOVER ENDS -->
+
+    <!-- DROP STARTS -->
+    <div role="tabpanel" class="tab-pane" id="drops">
+
+      <div class="container">
+        <div class="row">
+          <% var drops = result[0] %>
+          <% drops.forEach(function(drop) { %>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail">
+              <img src="<%= drop.productImageUrl %>" alt="...">
+              <div class="caption">
+                <h4><%= drop.name %></h4>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <%= drop.numberOfPurchased %><br>
+                  Purchased
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+
+    </div>
+    <!-- DROP ENDS -->
+
+    <!-- TALK STARTS -->
+    <div role="tabpanel" class="tab-pane" id="talk">
+      talk
+    </div>
+    <!-- TALK ENDS -->
+
+    <!-- POLL STARTS -->
+    <div role="tabpanel" class="tab-pane" id="polls">
+      polls
+
+      <% var polls = result[1] %>
+
+      <div class="container hidden-xs" style='background-color:#f4f4f4;'>
+        <!-- product name and by who -->
+        <div class="col-md-12 col-sm-12">
+
+        </div>
+        <!-- product name and by who end -->
+        <!-- top voted product image -->
+        <div class="col-md-3 col-sm-3">
+
+        </div>
+        <!-- top voted product image end -->
+        <!-- top three voted options -->
+        <div class="col-md-9 col-sm-9">
+          <div class="col-md-12 col-sm-12">
+            options
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+              name + votes
+            </div>
+          </div>
+        </div>
+        <!-- top three voted options end -->
+      </div>
+
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail">
+              <img src="..." alt="...">
+              <div class="caption">
+                <h3>Thumbnail label</h3>
+                <p>...</p>
+                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+    <!-- POLL ENDS -->
+  </div>
+
+  <% var categories = result[2] %>
+
+</div>

@@ -49,16 +49,35 @@ app.get("/", function(req, res) {
 
 app.use('/', require('./controllers/auth'));
 
-
+// any routes after this uses layout.ejs
 app.use(ejsLayouts);
+
 // any routes after this requires authorization
 app.use(isLoggedIn);
 
 app.get('/home', function(req,res) {
-  // db.category.findAll().then(function(categories) {
-    res.render('home');
-    //  {categories:categories});
-  // });
+  var result = [];
+  db.drop.findAll({
+    order: [['createdAt', 'ASC']]
+  }).then(function(drops) {
+    result.push(drops);
+    db.poll.findAll({
+      include: [db.option],
+      order: [ [db.option, 'votes', 'DESC'] ]
+    }).then(function(polls) {
+      result.push(polls);
+      db.community.findAll().then(function(communities) {
+        result.push(communities);
+        res.render('home', {result:result});
+        console.log('see here for drops >>>>>', result[0]);
+        console.log('see here for polls >>>>>', result[1]);
+        console.log('see here for options >>>>>', result[1][0].options[0].votes);
+        console.log('see here for categories >>>>>', result[2]);
+        console.log('see here for should not have anything >>>>>', result[3]);
+
+      });
+    });
+  });
 });
 
 var server = app.listen(process.env.PORT || 3000);

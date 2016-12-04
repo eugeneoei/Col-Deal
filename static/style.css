@@ -47,3 +47,14 @@ a:active {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+
+.poll-div {
+  background-color:white;
+  margin-bottom:5%;
+  padding: 20px;
+  border-radius: 25px;
+}
+
+.progress-bar-info {
+  width: 100% !important;
+}
