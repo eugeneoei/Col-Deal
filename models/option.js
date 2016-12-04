@@ -13,6 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        models.option.belongsTo(models.user);
+        models.option.belongsTo(models.poll);
       }
     }
   });

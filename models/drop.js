@@ -12,7 +12,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.drop.belongsTo(models.community);
+        models.drop.belongsTo(models.user);
       }
     }
   });
