@@ -12,6 +12,69 @@
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
+    <% if (currentUser) { %>
+      <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid" style='background-color:white;'>
+          <div class="navbar-header col-md-12 col-sm-12 col-xs-12">
+            <!-- <a class="navbar-brand" href='/home'>
+              <img id='logo' alt="Brand" src="http://vignette2.wikia.nocookie.net/mexico/images/4/4c/(R).png/revision/latest?cb=20131112010123&path-prefix=es">
+            </a> -->
+            <p class="navbar-text pacifico hidden-xs" style='font-size:30px; color:black;'>Col-Deal</p>
+            <!-- <p class="navbar-text pull-right hidden-sm hidden-xs"><a class='click-here' href="/logout">Log Out</a></p> -->
+            <div class="dropdown pull-right hidden-xs">
+              <p class="navbar-text">
+                <i id='user-icon-dropdown' class="fa fa-user-o fa-lg user-icon" data-toggle="dropdown" aria-hidden="true"></i>
+              </p>
+              <ul id='user-icon-dropdown-menu' class="dropdown-menu">
+                <li class="lato"><a>Profile</a></li>
+                <li class="lato"><a>transactions</a></li>
+                <li class="lato"><a>settings</a></li>
+                <li class="lato"><a href="/logout">Log Out</a></li>
+              </ul>
+            </div>
+            <!-- <div class="dropdown pull-right visible-md hidden-xs">
+              <p class="navbar-text">
+                <i id="icon-bar" class="fa fa-bars" data-toggle="dropdown"></i>
+              </p>
+              <ul id="icon-menu" class="dropdown-menu">
+                <li class="roboto-font"><a href="/home">Home</a></li>
+                <li class="roboto-font"><a href="/logout">Log Out</a></li>
+              </ul>
+            </div> -->
+
+            <p class="navbar-text pull-right hidden-xs"><i class="fa fa-bell-o fa-lg user-icon" aria-hidden="true"></i></p>
+            <!-- <p class="navbar-text pull-right hidden-sm hidden-xs"><a class='click-here' href="/home">Home</a></p> -->
+            <p class="navbar-text pull-right hidden-xs lato" style='color:black; font-size:25px !important;'><%= currentUser.firstName %> <%= currentUser.lastName %></p>
+            <!-- <div class="dropdown pull-right hidden-md visible-sm visible-xs">
+              <p class="navbar-text">
+                <i id="icon-bar" class="fa fa-bars" data-toggle="dropdown"></i>
+              </p>
+              <ul id="icon-menu" class="dropdown-menu">
+                <li class="roboto-font"><a href="/home">Home</a></li>
+                <li class="roboto-font"><a href="/logout">Log Out</a></li>
+              </ul>
+            </div> -->
+            <div class="col-xs-3" style='text-align:center;'>
+              <p class="navbar-text lato hidden-md hidden-sm visible-xs user-icon-xs-vp"><a href='/home'><i class="fa fa-home" aria-hidden="true"></i></a></p>
+            </div>
+            <div class="col-xs-3" style='text-align:center;'>
+              <p class="navbar-text lato hidden-md hidden-sm visible-xs user-icon-xs-vp"><i class="fa fa-th-large" aria-hidden="true"></i></p>
+            </div>
+            <div class="col-xs-3" style='text-align:center;'>
+              <p class="navbar-text lato hidden-md hidden-sm visible-xs user-icon-xs-vp"><i class="fa fa-bell" aria-hidden="true"></i></p>
+            </div>
+            <div class="col-xs-3" style='text-align:center;'>
+              <p class="navbar-text pacifico hidden-md hidden-sm visible-xs user-icon-xs-vp"><i class="fa fa-user" aria-hidden="true"></i></p>
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+    <% } %>
 
     <% include ./partials/alerts %>
     <!-- This layout will be used by all pages, and the content will be filled in where the <% body %> tag is placed.  -->
