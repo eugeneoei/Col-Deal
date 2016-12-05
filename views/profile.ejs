@@ -91,8 +91,7 @@
 
 <script type="text/javascript">
 
-  $(document).on("click", ".edit-option", function(ev) {
-    var buttonValue = ev.currentTarget.value;
+  $(document).on("click", ".edit-option", function() {
     $('#edit-option-form').remove();
     $('#profile-tab-content').hide();
 
@@ -100,10 +99,9 @@
       url: '/options/' + this.value + '/edit',
       method: "GET"
     }).done(function(dataFromServer) {
-      console.log(dataFromServer.length);
       $('#profile-container').append(
         '<div id="edit-option-form" class="row col-md-4 col-sm-4 col-xs-4">' +
-          '<form action="/option/' + dataFromServer.id + '?_method=PUT" method="post">' +
+          '<form action="/options/' + dataFromServer.id + '?_method=PUT" method="post">' +
             dataFromServer.name + '<br>' +
             'Description<br>' +
             '<input type="text" name="productDescription" value="' + dataFromServer.productDescription + '"><br>' +
@@ -129,9 +127,6 @@
     }).fail(function() {
       console.log("failed to retrieve data from app");
     });
-
-
-
   });
 
 </script>

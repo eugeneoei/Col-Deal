@@ -31,12 +31,26 @@ router.get('/profile', function(req,res) {
   });
 });
 
-// GET for to edit option
+// GET form to edit option
 router.get('/options/:id/edit', function(req,res) {
   db.option.findOne({
     where: {id:req.params.id}
   }).then(function(option) {
     res.json(option);
+  });
+});
+
+// UPDATE option
+router.put('/options/:id', function(req,res) {
+  db.option.update({
+    productUrl: req.body.productUrl,
+    productImageUrl: req.body.productImageUrl,
+    productDescription: req.body.productDescription,
+    productRetailsPrice: req.body.productRetailsPrice
+  }, {
+    where: { id: req.params.id }
+  }).then(function() {
+    res.redirect('/profile');
   });
 });
 
