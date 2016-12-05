@@ -1,7 +1,7 @@
 <!-- <h1>this is user's profile</h1> -->
 <!-- result[0] is poll, result[1] is option -->
 
-<div>
+<div id='profile-container'>
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist" style='text-align:center; margin-bottom:2%;'>
@@ -12,7 +12,7 @@
   </ul>
 
   <!-- Tab panes -->
-  <div class="tab-content">
+  <div class="tab-content" id='profile-tab-content'>
 
     <!-- ABOUT STARTS -->
     <div role="tabpanel" class="tab-pane active" id="about">
@@ -65,7 +65,8 @@
                       <a href='<%= option.productUrl %>'>View Product URL</a>
                       <p><%= option.productDescription %></p>
                       <p><%= option.productRetailsPrice %></p>
-                      <a href="/options/:<%= option.id %>/edit">Edit Option</a>
+                      <!-- <a class="btn btn-default edit-option" href="#" role="button" value='<%= option.id %>'>Edit Option</a> -->
+                      <button class="btn btn-default edit-option" value='<%= option.id %>'>Edit Option</button>
                     </div>
                   </div>
                 </div>
@@ -87,3 +88,50 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+
+  $(document).on("click", ".edit-option", function(ev) {
+    var buttonValue = ev.currentTarget.value;
+    $('#edit-option-form').remove();
+    $('#profile-tab-content').hide();
+
+    $.ajax({
+      url: '/options/' + this.value + '/edit',
+      method: "GET"
+    }).done(function(dataFromServer) {
+      console.log(dataFromServer.length);
+      $('#profile-container').append(
+        '<div id="edit-option-form" class="row col-md-4 col-sm-4 col-xs-4">' +
+          '<form action="/option/' + dataFromServer.id + '?_method=PUT" method="post">' +
+            dataFromServer.name + '<br>' +
+            'Description<br>' +
+            '<input type="text" name="productDescription" value="' + dataFromServer.productDescription + '"><br>' +
+            'Retail Price<br>' +
+            '<input type="text" name="productRetailsPrice" value="' + dataFromServer.productRetailsPrice + '"><br>' +
+            'Product Link<br>' +
+            '<input type="text" name="productUrl" value="' + dataFromServer.productUrl + '"><br>' +
+            'Product Image URL<br>' +
+            '<input type="text" name="productImageUrl" value="' + dataFromServer.productImageUrl + '"><br>' +
+            '<button type="submit" class="btn btn-default" name="button">SUBMIT</button>' +
+          '</form><br>' +
+          '<div id="profile-back">' +
+          'Back' +
+          '</div>' +
+        '</div>'
+      )
+      $(document).on('click', '#profile-back', function() {
+        console.log('back button clicked');
+        $('#profile-back').hide();
+        $('#edit-option-form').hide();
+        $('#profile-tab-content').show();
+      });
+    }).fail(function() {
+      console.log("failed to retrieve data from app");
+    });
+
+
+
+  });
+
+</script>

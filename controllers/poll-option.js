@@ -32,12 +32,12 @@ router.get('/profile', function(req,res) {
 });
 
 // GET for to edit option
-router.get('/options/:id/edit', funtion(req,res) {
+router.get('/options/:id/edit', function(req,res) {
   db.option.findOne({
     where: {id:req.params.id}
   }).then(function(option) {
-    res.render('')
-  })
+    res.json(option);
+  });
 });
 
 // GET USER'S PROFILE AND LOAD ALL OF USER'S POLLS AND OPTIONS
