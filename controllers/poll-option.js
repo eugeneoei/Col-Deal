@@ -54,6 +54,7 @@ router.put('/options/:id', function(req,res) {
   });
 });
 
+
 // GET USER'S PROFILE AND LOAD ALL OF USER'S POLLS AND OPTIONS
 // router.get('/profile', function(req,res) {
 //   var result = [];
@@ -107,6 +108,18 @@ router.put('/options/:id', function(req,res) {
 //   });
 // });
 
+
+// GET ONE POLL
+router.get('/polls/:id', function(req,res) {
+  db.poll.findOne({
+    where: {id:req.params.id}
+  }).then(function(poll) {
+    poll.getOptions().then(function(options) {
+      console.log('see here for one poll with all its options', options);
+      res.render('polls/poll_details', {options:options});
+    });
+  });
+});
 
 // CREATE NEW POLL AND OPTION
 router.post('/polls', function(req, res) {

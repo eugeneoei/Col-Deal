@@ -86,71 +86,73 @@
       <!-- FOR MD AND SM START-->
       <% var polls = result[1] %>
       <% polls.forEach(function(poll) { %>
-      <div class="container hidden-xs poll-div">
-        <!-- product name and by who start -->
-        <div class="col-md-12 col-sm-12">
-          <%= poll.name %> - by <%= poll.user.firstName %> <%= poll.user.lastName %>
-        </div>
-        <!-- product name and by who end -->
-        <!-- top voted product image start -->
-        <% var options = poll.options %>
-        <% var minOptionsLength = Math.min(options.length, 3) %>
-        <div class="col-md-3 col-sm-3">
-          <img src="<%= options[0].productImageUrl %>" style='width:100%;'/>
-        </div>
-        <!-- top voted product image end -->
-        <!-- top three voted options start -->
-        <% if (minOptionsLength == 0) { %>
-        <div class="col-md-9 col-sm-9">
-          THERE ARE NO SUGGESTED OPTIONS FOR THIS POLL YET. WOULD YOU LIKE TO SUGGEST ONE?
-        </div>
-        <% } else { %>
-        <div class="col-md-9 col-sm-9">
+      <a href='/polls/<%= poll.id %>'>
+        <div class="container hidden-xs poll-div">
+          <!-- product name and by who start -->
           <div class="col-md-12 col-sm-12">
-            options
+            <%= poll.name %> - by <%= poll.user.firstName %> <%= poll.user.lastName %>
           </div>
-          <% var numberOfOtherOptions = options.length - 3 %>
-          <% var totalVotes = 0 %>
-          <% for (var j = 0; j < minOptionsLength; j++) { %>
-            <% totalVotes += parseInt(options[j].votes) %>
-            <% } %>
-            <% for (var j = 0; j < minOptionsLength; j++) { %>
-              <div class="col-md-12 col-sm-12">
+          <!-- product name and by who end -->
+          <!-- top voted product image start -->
+          <% var options = poll.options %>
+          <% var minOptionsLength = Math.min(options.length, 3) %>
+          <div class="col-md-3 col-sm-3">
+            <img src="<%= options[0].productImageUrl %>" style='width:100%;'/>
+          </div>
+          <!-- top voted product image end -->
+          <!-- top three voted options start -->
+          <% if (minOptionsLength == 0) { %>
+            <div class="col-md-9 col-sm-9">
+              THERE ARE NO SUGGESTED OPTIONS FOR THIS POLL YET. WOULD YOU LIKE TO SUGGEST ONE?
+            </div>
+            <% } else { %>
+              <div class="col-md-9 col-sm-9">
                 <div class="col-md-12 col-sm-12">
-                  <div class="col-md-4 col-sm-4">
-                    <% var rank = '' %>
-                    <% if (j === 0) { %>
-                      <% rank = '1st' %>
-                      <% } else if (j === 1) { %>
-                        <% rank = '2nd' %>
-                        <% } else { %>
-                          <% rank= '3rd' %>
+                  options
+                </div>
+                <% var numberOfOtherOptions = options.length - 3 %>
+                <% var totalVotes = 0 %>
+                <% for (var j = 0; j < minOptionsLength; j++) { %>
+                  <% totalVotes += parseInt(options[j].votes) %>
+                  <% } %>
+                  <% for (var j = 0; j < minOptionsLength; j++) { %>
+                    <div class="col-md-12 col-sm-12">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="col-md-4 col-sm-4">
+                          <% var rank = '' %>
+                          <% if (j === 0) { %>
+                            <% rank = '1st' %>
+                            <% } else if (j === 1) { %>
+                              <% rank = '2nd' %>
+                              <% } else { %>
+                                <% rank= '3rd' %>
+                                <% } %>
+                                <%= rank %>
+                              </div>
+                              <div class="col-md-8 col-sm-8" style='text-align:right;'>
+                                <%= options[j].votes %> Votes
+                              </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                              <%= options[j].name %>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                              <progress id="progressOptionId<%= options[j].id %>" class="progress progress-info progress-bar-info" value="<%= options[j].votes %>" max="<%= totalVotes %>"></progress>
+                            </div>
+                          </div>
                           <% } %>
-                          <%= rank %>
-                        </div>
-                        <div class="col-md-8 col-sm-8" style='text-align:right;'>
-                          <%= options[j].votes %> Votes
-                        </div>
-                      </div>
-                      <div class="col-md-12 col-sm-12">
-                        <%= options[j].name %>
-                      </div>
-                      <div class="col-md-12 col-sm-12">
-                        <progress id="progressOptionId<%= options[j].id %>" class="progress progress-info progress-bar-info" value="<%= options[j].votes %>" max="<%= totalVotes %>"></progress>
-                      </div>
-                    </div>
-                    <% } %>
-                    <% if (options.length < 4) { %>
-                      <% // do nothing %>
-                      <% } else { %>
-                        <div class="col-md-3 col-sm-3">
-                          +<%= numberOfOtherOptions %> OTHER OPTION
-                        </div>
-                        <% } %>
-                      </div>
-        <% } %>
-        <!-- top three voted options end -->
-      </div>
+                          <% if (options.length < 4) { %>
+                            <% // do nothing %>
+                            <% } else { %>
+                              <div class="col-md-3 col-sm-3">
+                                +<%= numberOfOtherOptions %> OTHER OPTION
+                              </div>
+                              <% } %>
+                            </div>
+                            <% } %>
+                            <!-- top three voted options end -->
+                          </div>
+      </a>
       <% }) %>
       <!-- FOR MD AND SM END-->
 
