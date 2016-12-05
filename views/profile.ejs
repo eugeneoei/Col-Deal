@@ -1,0 +1,89 @@
+<!-- <h1>this is user's profile</h1> -->
+<!-- result[0] is poll, result[1] is option -->
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" style='text-align:center; margin-bottom:2%;'>
+    <li role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#about" aria-controls="home" role="tab" data-toggle="tab">ABOUT</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#drops" aria-controls="profile" role="tab" data-toggle="tab">DROPS</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#polls" aria-controls="messages" role="tab" data-toggle="tab">POLLS</a></li>
+    <!-- <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#options" aria-controls="settings" role="tab" data-toggle="tab">OPTIONS</a></li> -->
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <!-- ABOUT STARTS -->
+    <div role="tabpanel" class="tab-pane active" id="about">
+      about
+    </div>
+    <!-- ABOUT ENDS -->
+
+    <!-- DROP STARTS -->
+    <div role="tabpanel" class="tab-pane" id="drops">
+      drops
+    </div>
+    <!-- DROP ENDS -->
+
+    <!-- POLL STARTS -->
+    <div role="tabpanel" class="tab-pane" id="polls">
+      polls
+      <div class="container">
+
+      </div>
+
+      <% if (message) { %>
+        <div class="container" style='text-align:center;'>
+          <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+            <div class="row">
+              <div class="col-md-12 roboto-font" style='font-size:100px;'>
+                <strong>Ooops!</strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 roboto-font" style='font-size:25px;'>
+                <%= message %>
+                <a href="/home" class='click-here'><span class='grow'>Click here</span></a> and create one!
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="container">
+          <% polls.forEach(function(poll) { %>
+          <h1><%= poll.name %></h1>
+          <div class="row">
+            <% var options = poll.options %>
+            <% options.forEach(function(option) { %>
+              <% if(currentUser.id == option.userId) { %>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="thumbnail">
+                    <img src="<%= option.productImageUrl %>" alt="...">
+                    <div class="caption">
+                      <h4><%= option.name %></h4>
+                      <a href='<%= option.productUrl %>'>View Product URL</a>
+                      <p><%= option.productDescription %></p>
+                      <p><%= option.productRetailsPrice %></p>
+                      <a href="/options/:<%= option.id %>/edit">Edit Option</a>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+            <% }) %>
+          </div>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+    <!-- POLL ENDS -->
+
+    <!-- OPTION STARTS -->
+    <div role="tabpanel" class="tab-pane" id="options">
+      options
+    </div>
+    <!-- OPTION ENDS -->
+
+  </div>
+
+</div>

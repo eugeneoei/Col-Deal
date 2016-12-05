@@ -9,43 +9,89 @@ var app = express();
 app.use(express.static("static"));
 app.use(methodOverride('_method'));
 
-app.use(isLoggedIn);
+// app.use(isLoggedIn);
 
-// GET ALL USER'S POLLS
-router.get('/user/polls', function(req,res) {
+// GET USER'S PROFILE AND LOAD ALL OF USER'S POLLS AND OPTIONS
+router.get('/profile', function(req,res) {
   db.user.findOne({
     where: {id: req.user.id}
   }).then(function(user) {
     user.getPolls({
-      order: [['createdAt', 'DESC']]
+      include: [db.option],
+      order: [['createdAt', 'ASC']]
     }).then(function(polls) {
+      console.log('see here for user profile', polls[0].options);
       if (polls.length < 1) {
         // if user has not created any post, flash this message
-        res.render('polls/poll_user', {message: 'Seems like you have not created any post yet.'})
+        res.render('profile', {message: 'Seems like you have not created any polls yet.'})
       } else {
-        res.render('polls/poll_user', {polls: polls, message: ''})
+        res.render('profile', {polls: polls, message: ''})
       }
     });
   });
 });
 
-// GET ALL USER'S OPTIONS
-router.get('/user/options', function (req,res) {
-  db.user.findOne({
-    where: {id: req.user.id}
-  }).then(function(user) {
-    user.getOptions({
-      order: [['createdAt', 'DESC']]
-    }).then(function(options) {
-      if (options.length < 1) {
-        // if user has not created any post, flash this message
-        res.render('options/option_user', {message: 'Seems like you have not created any post yet.'})
-      } else {
-        res.render('options/option_user', {options: options, message: ''})
-      }
-    });
-  });
+// GET for to edit option
+router.get('/options/:id/edit', funtion(req,res) {
+  db.option.findOne({
+    where: {id:req.params.id}
+  }).then(function(option) {
+    res.render('')
+  })
 });
+
+// GET USER'S PROFILE AND LOAD ALL OF USER'S POLLS AND OPTIONS
+// router.get('/profile', function(req,res) {
+//   var result = [];
+//   db.poll.findAll({
+//     where: {userId:req.user.id}
+//   }).then(function(polls) {
+//     result.push(polls);
+//     db.option.findAll({
+//       where: {userId:req.user.id}
+//     }).then(function(options) {
+//       result.push(options);
+//       res.render('profile', {result:result})
+//     })
+//   })
+// });
+
+// // GET ALL USER'S POLLS
+// router.get('/user/polls', function(req,res) {
+//   db.user.findOne({
+//     where: {id: req.user.id}
+//   }).then(function(user) {
+//     user.getPolls({
+//       order: [['createdAt', 'DESC']]
+//     }).then(function(polls) {
+//       if (polls.length < 1) {
+//         // if user has not created any post, flash this message
+//         res.render('polls/poll_user', {message: 'Seems like you have not created any post yet.'})
+//       } else {
+//         res.render('polls/poll_user', {polls: polls, message: ''})
+//       }
+//     });
+//   });
+// });
+
+// // GET ALL USER'S OPTIONS
+// router.get('/user/options', function (req,res) {
+//   db.user.findOne({
+//     where: {id: req.user.id}
+//   }).then(function(user) {
+//     user.getOptions({
+//       include: [db.poll],
+//       order: [['createdAt', 'DESC']]
+//     }).then(function(options) {
+//       if (options.length < 1) {
+//         // if user has not created any post, flash this message
+//         res.render('options/option_user', {message: 'Seems like you have not created any post yet.'})
+//       } else {
+//         res.render('options/option_user', {options: options, message: ''})
+//       }
+//     });
+//   });
+// });
 
 
 // CREATE NEW POLL AND OPTION
