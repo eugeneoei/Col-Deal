@@ -70,7 +70,7 @@ app.get('/home', function(req,res) {
         result.push(communities);
         res.render('home', {result:result});
         // console.log('see here for drops >>>>>', result[0]);
-        console.log('see here for polls >>>>>', result[1][0].user);
+        // console.log('see here for polls >>>>>', result[1][0].user);
         // console.log('see here for options >>>>>', result[1][0].options[0]);
         // console.log('see here for categories >>>>>', result[2]);
         // console.log('see here for should not have anything >>>>>', result[3]);
@@ -79,6 +79,8 @@ app.get('/home', function(req,res) {
     });
   });
 });
+
+app.use('/', require('./controllers/poll-option'));
 
 var server = app.listen(process.env.PORT || 3000);
 

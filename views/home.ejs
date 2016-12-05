@@ -1,4 +1,4 @@
-<div>
+<div id='main-container'>
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist" style='text-align:center; margin-bottom:2%;'>
@@ -81,9 +81,9 @@
       <!-- <div class="container col-md-12 col-sm-3 col-xs-6">
         <button class="btn btn-default" type="submit">START A NEW POLL</button>
       </div> -->
-      <div class="container" style='padding:0;'>
+      <div class="container hidden-xs" style='padding:0;'>
         <div class="col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-3 col-xs-offset-9" style='padding:0; margin-bottom:2%;'>
-          <button class="btn btn-default" type="submit" style='width:100%;'>START A NEW POLL</button>
+          <button class="btn btn-default new-poll-button" type="submit" style='width:100%;'>START A NEW POLL</button>
         </div>
       </div>
       <!-- FOR MD AND SM START-->
@@ -103,6 +103,11 @@
         </div>
         <!-- top voted product image end -->
         <!-- top three voted options start -->
+        <% if (minOptionsLength == 0) { %>
+        <div class="col-md-9 col-sm-9">
+          THERE ARE NO SUGGESTED OPTIONS FOR THIS POLL YET. WOULD YOU LIKE TO SUGGEST ONE?
+        </div>
+        <% } else { %>
         <div class="col-md-9 col-sm-9">
           <div class="col-md-12 col-sm-12">
             options
@@ -111,41 +116,42 @@
           <% var totalVotes = 0 %>
           <% for (var j = 0; j < minOptionsLength; j++) { %>
             <% totalVotes += parseInt(options[j].votes) %>
-          <% } %>
-          <% for (var j = 0; j < minOptionsLength; j++) { %>
-          <div class="col-md-12 col-sm-12">
-            <div class="col-md-12 col-sm-12">
-              <div class="col-md-4 col-sm-4">
-                <% var rank = '' %>
-                <% if (j === 0) { %>
-                  <% rank = '1st' %>
-                <% } else if (j === 1) { %>
-                  <% rank = '2nd' %>
-                <% } else { %>
-                  <% rank= '3rd' %>
-                <% } %>
-                <%= rank %>
-              </div>
-              <div class="col-md-8 col-sm-8" style='text-align:right;'>
-                <%= options[j].votes %> Votes
-              </div>
-            </div>
-            <div class="col-md-12 col-sm-12">
-              <%= options[j].name %>
-            </div>
-            <div class="col-md-12 col-sm-12">
-              <progress id="progressOptionId<%= options[j].id %>" class="progress progress-info progress-bar-info" value="<%= options[j].votes %>" max="<%= totalVotes %>"></progress>
-            </div>
-          </div>
-          <% } %>
-          <% if (options.length < 4) { %>
-            <% // do nothing %>
-          <% } else { %>
-          <div class="col-md-3 col-sm-3">
-            +<%= numberOfOtherOptions %> OTHER OPTION
-          </div>
-          <% } %>
-        </div>
+            <% } %>
+            <% for (var j = 0; j < minOptionsLength; j++) { %>
+              <div class="col-md-12 col-sm-12">
+                <div class="col-md-12 col-sm-12">
+                  <div class="col-md-4 col-sm-4">
+                    <% var rank = '' %>
+                    <% if (j === 0) { %>
+                      <% rank = '1st' %>
+                      <% } else if (j === 1) { %>
+                        <% rank = '2nd' %>
+                        <% } else { %>
+                          <% rank= '3rd' %>
+                          <% } %>
+                          <%= rank %>
+                        </div>
+                        <div class="col-md-8 col-sm-8" style='text-align:right;'>
+                          <%= options[j].votes %> Votes
+                        </div>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                        <%= options[j].name %>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                        <progress id="progressOptionId<%= options[j].id %>" class="progress progress-info progress-bar-info" value="<%= options[j].votes %>" max="<%= totalVotes %>"></progress>
+                      </div>
+                    </div>
+                    <% } %>
+                    <% if (options.length < 4) { %>
+                      <% // do nothing %>
+                      <% } else { %>
+                        <div class="col-md-3 col-sm-3">
+                          +<%= numberOfOtherOptions %> OTHER OPTION
+                        </div>
+                        <% } %>
+                      </div>
+        <% } %>
         <!-- top three voted options end -->
       </div>
       <% }) %>
@@ -154,11 +160,16 @@
 
       <!-- FOR XS START -->
       <% var pollsXS = result[1] %>
+      <div class="container hidden-md hidden-sm visible-xs" style=''>
+        <div class="col-xs-12" style='padding:0; margin-top:1%;'>
+          <button class="btn btn-default new-poll-button" type="submit" style='width:100%;'>START A NEW POLL</button>
+        </div>
+      </div>
       <% pollsXS.forEach(function(pollXS) { %>
 
-      <div class="container hidden-md hidden-sm visible-xs poll-div">
+      <div class="container hidden-md hidden-sm visible-xs poll-div" style='margin:4% 2%;'>
         <div class="col-xs-12">
-          <%= pollXS.name %>
+          <%= pollXS.name %> - by <%= pollXS.user.firstName %> <%= pollXS.user.lastName %>
         </div>
         <% var optionsXS = pollXS.options %>
         <% var minOptionsLengthXS = Math.min(optionsXS.length, 3) %>
@@ -212,8 +223,51 @@
     <!-- POLL ENDS -->
   </div>
 
-  <% var categories = result[2] %>
 
+</div>
+
+<div id='create-form-container'class="container">
+  <div class="container">
+    <div class="row" style='border-bottom:1px solid black;'>
+      Start A New Poll <br>
+      Search before creating a poll as it may already be on Col-Deal.
+    </div>
+    <form action='/polls' method="post">
+      <div class="row">
+        Which Community do your products belong to?<br>
+        <% var communities = result[2] %>
+        <select name="community">
+          <option>Choose a Community</option>
+          <% communities.forEach(function(community) { %>
+          <option value="<%= community.dataValues.name %>"><%= community.dataValues.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <hr>
+      <div class="row">
+        Title of Your Poll<br>
+        <em>What type of products are you interested in?</em><br>
+        <input type="text" name="poll"><br>
+      </div>
+      <hr>
+      <div class=" row col-md-4 col-sm-4 col-xs-4">
+        Name<br>
+        <input type="text" name="name"><br>
+        Description<br>
+        <input type="text" name="productDescription"><br>
+        Retail Price<br>
+        <input type="text" name="productRetailsPrice"><br>
+        Product Link<br>
+        <input type="text" name="productUrl"><br>
+        Product Image URL<br>
+        <input type="text" name="productImageUrl"><br>
+        <button type="submit" class="btn btn-default" name="button">SUBMIT</button>
+      </div>
+    </form>
+  </div>
+  <div id='back'>
+    back
+  </div>
 </div>
 
 <!-- <div class="container col-md-12 col-sm-3 col-xs-6">
