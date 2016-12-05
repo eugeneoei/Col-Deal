@@ -16,36 +16,42 @@ module.exports = {
       {
         name: 'Leather Messenger Bags',
         communityId: 6,
+        userId: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'Best Adidas shoe to get from Col-Deal.',
         communityId: 1,
+        userId: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'Best Statement Watches',
         communityId: 4,
+        userId: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'oppermann leather wallet',
         communityId: 5,
+        userId: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'Chester Mox #53 Compact Bi-fold Horween Shell Cordovan Dark Green',
         communityId: 5,
+        userId: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'Loafers',
         communityId: 1,
+        userId: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       }

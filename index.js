@@ -62,18 +62,18 @@ app.get('/home', function(req,res) {
   }).then(function(drops) {
     result.push(drops);
     db.poll.findAll({
-      include: [db.option],
+      include: [db.option, db.user],
       order: [ [db.option, 'votes', 'DESC'] ]
     }).then(function(polls) {
       result.push(polls);
       db.community.findAll().then(function(communities) {
         result.push(communities);
         res.render('home', {result:result});
-        console.log('see here for drops >>>>>', result[0]);
-        console.log('see here for polls >>>>>', result[1]);
-        console.log('see here for options >>>>>', result[1][0].options[0].votes);
-        console.log('see here for categories >>>>>', result[2]);
-        console.log('see here for should not have anything >>>>>', result[3]);
+        // console.log('see here for drops >>>>>', result[0]);
+        console.log('see here for polls >>>>>', result[1][0].user);
+        // console.log('see here for options >>>>>', result[1][0].options[0]);
+        // console.log('see here for categories >>>>>', result[2]);
+        // console.log('see here for should not have anything >>>>>', result[3]);
 
       });
     });

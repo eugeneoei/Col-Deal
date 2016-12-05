@@ -68,6 +68,7 @@ module.exports = function(sequelize, DataTypes) {
         // associations can be defined here
         models.user.hasMany(models.drop);
         models.user.hasMany(models.option);
+        models.user.hasMany(models.poll);
       }
     },
     instanceMethods: {
