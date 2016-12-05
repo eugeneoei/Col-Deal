@@ -31,7 +31,20 @@ router.get('/user/polls', function(req,res) {
 
 // GET ALL USER'S OPTIONS
 router.get('/user/options', function (req,res) {
-
+  db.user.findOne({
+    where: {id: req.user.id}
+  }).then(function(user) {
+    user.getOptions({
+      order: [['createdAt', 'DESC']]
+    }).then(function(options) {
+      if (options.length < 1) {
+        // if user has not created any post, flash this message
+        res.render('options/option_user', {message: 'Seems like you have not created any post yet.'})
+      } else {
+        res.render('options/option_user', {options: options, message: ''})
+      }
+    });
+  });
 });
 
 
