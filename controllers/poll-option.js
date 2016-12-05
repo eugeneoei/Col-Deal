@@ -111,12 +111,16 @@ router.put('/options/:id', function(req,res) {
 
 // GET ONE POLL
 router.get('/polls/:id', function(req,res) {
+  var pollResult = [];
   db.poll.findOne({
-    where: {id:req.params.id}
+    where: {id:req.params.id},
+    include: [db.user]
   }).then(function(poll) {
-    poll.getOptions().then(function(options) {
+    pollResult.push(poll);
+    poll.getOptions({include: [db.user]}).then(function(options) {
+      pollResult.push(options);
       console.log('see here for one poll with all its options', options);
-      res.render('polls/poll_details', {options:options});
+      res.render('polls/poll_details', {pollResult:pollResult});
     });
   });
 });

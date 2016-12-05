@@ -1,1 +1,84 @@
-<h1>this page shows one poll with all its options</h1>
+<!-- pollResult[0] is poll pollResult[1] is options -->
+
+<div>
+
+  <h1><%= pollResult[0].name %> by <%= pollResult[0].user.firstName %> <%= pollResult[0].user.lastName %></h1>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" style='text-align:center; margin-bottom:2%;'>
+    <li role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#voting" aria-controls="home" role="tab" data-toggle="tab">VOTING</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#results" aria-controls="profile" role="tab" data-toggle="tab">RESULTS</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#discussion" aria-controls="messages" role="tab" data-toggle="tab">DISCUSSION</a></li>
+  </ul>
+
+  <h1>this page shows one poll with all its options</h1>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <div role="tabpanel" class="tab-pane active" id="voting">
+      <div class="container poll-div">
+        <div class="row">
+          <% var options = pollResult[1] %>
+          <% options.forEach(function(option) { %>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail">
+              <img src="<%= option.productImageUrl %>" alt="...">
+              <div class="caption">
+                <h3><%= option.name %></h3>
+                <a href='<%= option.productUrl %>'>VIEW WEBSITE</a>
+                <p>by <%= option.user.firstName %> <%= option.user.lastName %></p>
+                <button class="btn btn-default" type="submit" style='width:100%;'>VOTE</button>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail">
+              ADD AN OPTION
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="results">
+      RESULTS
+      <div class="container poll-div">
+        <% var optionsResults = pollResult[1] %>
+        <% var totalVotes = 0 %>
+        <% for (var i = 0; i < optionsResults.length; i++) { %>
+          <% totalVotes += parseInt(options[i].votes) %>
+        <% } %>
+        <% optionsResults.forEach(function(optionResult) { %>
+
+        <div class="row" style='margin-bottom:3%; border-bottom:1px solid black; padding: 15px;'>
+          <div class="col-md-2 col-sm-2 col-xs-2">
+            <img src="<%= optionResult.productImageUrl %>" alt="" style='width:100%;'/>
+          </div>
+          <div class="col-md-10 col-sm-10 col-xs-10">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <%= optionResult.name %>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              by <%= optionResult.user.firstName %> <%= optionResult.user.lastName %>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <progress class="progress progress-info progress-bar-info" value="<%= optionResult.votes %>" max="<%= totalVotes %>"></progress>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12" style='text-align:right;'>
+              <%= optionResult.votes %> votes
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="discussion">
+      DISCUSSION
+    </div>
+
+  </div>
+
+</div>

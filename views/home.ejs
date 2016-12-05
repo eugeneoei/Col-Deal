@@ -114,44 +114,44 @@
                 <% var totalVotes = 0 %>
                 <% for (var j = 0; j < minOptionsLength; j++) { %>
                   <% totalVotes += parseInt(options[j].votes) %>
-                  <% } %>
-                  <% for (var j = 0; j < minOptionsLength; j++) { %>
+                <% } %>
+                <% for (var j = 0; j < minOptionsLength; j++) { %>
+                  <div class="col-md-12 col-sm-12">
                     <div class="col-md-12 col-sm-12">
-                      <div class="col-md-12 col-sm-12">
-                        <div class="col-md-4 col-sm-4">
-                          <% var rank = '' %>
-                          <% if (j === 0) { %>
-                            <% rank = '1st' %>
-                            <% } else if (j === 1) { %>
-                              <% rank = '2nd' %>
-                              <% } else { %>
-                                <% rank= '3rd' %>
-                                <% } %>
-                                <%= rank %>
-                              </div>
-                              <div class="col-md-8 col-sm-8" style='text-align:right;'>
-                                <%= options[j].votes %> Votes
-                              </div>
+                      <div class="col-md-4 col-sm-4">
+                        <% var rank = '' %>
+                        <% if (j === 0) { %>
+                          <% rank = '1st' %>
+                          <% } else if (j === 1) { %>
+                            <% rank = '2nd' %>
+                            <% } else { %>
+                              <% rank= '3rd' %>
+                              <% } %>
+                              <%= rank %>
                             </div>
-                            <div class="col-md-12 col-sm-12">
-                              <%= options[j].name %>
-                            </div>
-                            <div class="col-md-12 col-sm-12">
-                              <progress id="progressOptionId<%= options[j].id %>" class="progress progress-info progress-bar-info" value="<%= options[j].votes %>" max="<%= totalVotes %>"></progress>
+                            <div class="col-md-8 col-sm-8" style='text-align:right;'>
+                              <%= options[j].votes %> Votes
                             </div>
                           </div>
-                          <% } %>
+                          <div class="col-md-12 col-sm-12">
+                            <%= options[j].name %>
+                          </div>
+                          <div class="col-md-12 col-sm-12">
+                            <progress id="progressOptionId<%= options[j].id %>" class="progress progress-info progress-bar-info" value="<%= options[j].votes %>" max="<%= totalVotes %>"></progress>
+                          </div>
+                        </div>
+                        <% } %>
                           <% if (options.length < 4) { %>
                             <% // do nothing %>
-                            <% } else { %>
-                              <div class="col-md-3 col-sm-3">
-                                +<%= numberOfOtherOptions %> OTHER OPTION
-                              </div>
-                              <% } %>
+                          <% } else { %>
+                            <div class="col-md-3 col-sm-3">
+                              +<%= numberOfOtherOptions %> OTHER OPTION
                             </div>
                             <% } %>
-                            <!-- top three voted options end -->
-                          </div>
+                        </div>
+                        <% } %>
+                        <!-- top three voted options end -->
+                      </div>
       </a>
       <% }) %>
       <!-- FOR MD AND SM END-->
