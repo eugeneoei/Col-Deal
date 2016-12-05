@@ -11,12 +11,34 @@ app.use(methodOverride('_method'));
 
 app.use(isLoggedIn);
 
+// GET ALL USER'S POLLS
+router.get('/user/polls', function(req,res) {
+  db.user.findOne({
+    where: {id: req.user.id}
+  }).then(function(user) {
+    user.getPolls({
+      order: [['createdAt', 'DESC']]
+    }).then(function(polls) {
+      if (polls.length < 1) {
+        // if user has not created any post, flash this message
+        res.render('polls/poll_user', {message: 'Seems like you have not created any post yet.'})
+      } else {
+        res.render('polls/poll_user', {polls: polls, message: ''})
+      }
+    });
+  });
+});
+
+// GET ALL USER'S OPTIONS
+router.get('/user/options', function (req,res) {
+
+});
+
+
+// CREATE NEW POLL AND OPTION
 router.post('/polls', function(req, res) {
-  // var list;
   var communityId;
   db.community.findAll().then(function(communities) {
-    // list = communities;
-    console.log('see here for communities', communities);
     for (var i = 0; i < communities.length; i++) {
       if (req.body.community == communities[i].name) {
         communityId = communities[i].id;
