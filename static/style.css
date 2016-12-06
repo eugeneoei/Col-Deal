@@ -161,3 +161,95 @@ progress[value]::-webkit-progress-value {
   width: 95%;
   margin: 0 auto;
 }
+
+.nav-tabs {
+  border-top: 1px solid #ddd;
+  text-align:center;
+  margin-bottom:2%;
+  background-color:white;
+  padding:3vh;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li>a,
+.nav-tabs>li>a:hover {
+  background-color: transparent;
+  border: none;
+}
+
+.nav-tabs>li.active>a:focus {
+  border: none;
+  text-decoration: none;
+  background-color: transparent;
+  color: #00aeda
+}
+
+.nav-tabs>li.active {
+  border-bottom: 1px solid #00aeda;
+  /*color: #00aeda;*/
+}
+
+.nav-tabs>li.active>a {
+  color: #00aeda;
+}
+
+
+/*.nav-tabs>li.active>a:link,
+.nav-tabs>li.active>a:visited,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:active, {
+  background-color: transparent;
+}*/
+
+.footer {
+  background-color:white;
+}
+
+.footer-md {
+  background-color:white;
+  height: 15vh;
+  line-height: 15vh;
+}
+
+.footer-sm {
+  background-color:white;
+  height: 30vh;
+  line-height: 15vh;
+  text-align: center;
+}
+
+.footer-xs {
+  background-color:white;
+  height: 15vh;
+  line-height: 15vh;
+  text-align: center;
+}
+
+.footer-md-icon {
+  text-align:right;
+  font-size:3vh;
+}
+
+.footer-sm-icon {
+  text-align:center;
+  font-size:3vh;
+}
+
+.footer-xs-icon {
+  text-align:center;
+  font-size:3vh;
+}
+
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover {
+  background-color: transparent;
+}
+
+.fa-bars:hover {
+  cursor: pointer;
+}
+
+.dropdown-menu>li>a {
+  letter-spacing: 2px;
+}

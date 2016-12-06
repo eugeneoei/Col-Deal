@@ -1,14 +1,16 @@
 <!-- pollResult[0] is poll pollResult[1] is options -->
-
-<div class='lato'>
-
+<div class="container-fluid lato" style='background-color:white; margin-top:-4vh;'>
   <div class="container">
     <h1 style='margin-bottom:14px;'><%= pollResult[0].name %></h1>
     <p>by <span class='light-blue'><%= pollResult[0].user.firstName %> <%= pollResult[0].user.lastName %></span></p>
   </div>
+</div>
+
+<div class='lato'>
+
 
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist" style='text-align:center; margin-bottom:2%;'>
+  <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#voting" aria-controls="home" role="tab" data-toggle="tab">VOTING</a></li>
     <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#results" aria-controls="profile" role="tab" data-toggle="tab">RESULTS</a></li>
     <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#discussion" aria-controls="messages" role="tab" data-toggle="tab">DISCUSSION</a></li>
