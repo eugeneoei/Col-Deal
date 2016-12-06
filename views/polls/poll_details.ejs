@@ -35,20 +35,34 @@
                 </div>
                 <a href='<%= option.productUrl %>'>VIEW WEBSITE</a>
                 <p><span class='grey'>by </span><%= option.user.firstName %> <span class='light-blue'><%= option.user.lastName %></span></p>
-                <button class="btn btn-default vote-option-button" type="submit" style='width:100%;'>VOTE</button>
+                <button class="vote-option-button" type="submit" style='width:100%;'>VOTE</button>
               </div>
             </div>
           </div>
           <% }) %>
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="thumbnail">
+              <div style='height:50vh; width:100%; text-align:center;'>
+                <span class="glyphicon glyphicon-plus light-blue" aria-hidden="true" style='line-height:60vh; font-size:70px;'></span>
+                <!-- <img style='height:50vh; width:100%;'> -->
+              </div>
+              <div class="caption">
+                <div style='height:20vh; text-align:center;'>
+                  <span class='light-blue' style='font-size:20px; font-weight:bold;'>ADD AN OPTION</span>
+                </div>
+                <a style='color:transparent;'>VIEW WEBSITE</a>
+                <p style='color:transparent;'>test</p>
+                <button class="special">VOTE</button>
+              </div>
+            </div>
+            <!-- <div class="thumbnail">
               <div class='add-option-div-one'>
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
               </div>
               <div class="add-option-div-two">
                 ADD AN OPTION
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
