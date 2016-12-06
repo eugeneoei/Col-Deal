@@ -137,3 +137,27 @@ progress[value]::-webkit-progress-value {
   border: 1px solid black !important;
   color: black !important;
 }*/
+
+.add-option-div-one {
+  height:46vh;
+  text-align: center;
+  font-size: 20vh;
+  line-height: 68vh;
+  color: #00aeda;
+}
+
+.add-option-div-two {
+  height:46vh;
+  text-align: center;
+  font-size: 3vh;
+  line-height: 20vh;
+  color: #00aeda;
+}
+
+.result-div {
+  margin-bottom: 3%;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 24px 0px;
+  width: 95%;
+  margin: 0 auto;
+}

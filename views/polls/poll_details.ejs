@@ -1,8 +1,11 @@
 <!-- pollResult[0] is poll pollResult[1] is options -->
 
-<div>
+<div class='lato'>
 
-  <h1><%= pollResult[0].name %> by <%= pollResult[0].user.firstName %> <%= pollResult[0].user.lastName %></h1>
+  <div class="container">
+    <h1 style='margin-bottom:14px;'><%= pollResult[0].name %></h1>
+    <p>by <span class='light-blue'><%= pollResult[0].user.firstName %> <%= pollResult[0].user.lastName %></span></p>
+  </div>
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist" style='text-align:center; margin-bottom:2%;'>
@@ -37,10 +40,12 @@
           <% }) %>
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="thumbnail">
-              <span class='light-blue' style='font-size:50vh'>
+              <div class='add-option-div-one'>
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <span style='font-size:6vh;'>ADD AN OPTION</span>
-              <span><br>
+              </div>
+              <div class="add-option-div-two">
+                ADD AN OPTION
+              </div>
             </div>
           </div>
         </div>
@@ -48,28 +53,29 @@
     </div>
 
     <div role="tabpanel" class="tab-pane" id="results">
-      RESULTS
       <div class="container poll-div lato">
         <% var optionsResults = pollResult[1] %>
-        <% var totalVotes = 0 %>
+        <% var highestVotes = 0 %>
         <% for (var i = 0; i < optionsResults.length; i++) { %>
-          <% totalVotes += parseInt(options[i].votes) %>
+          <% if (highestVotes < parseInt(options[i].votes)) { %>
+            <% highestVotes = parseInt(options[i].votes) %>
+          <% } %>
         <% } %>
         <% optionsResults.forEach(function(optionResult) { %>
 
-        <div class="row" style='margin-bottom:3%; border-bottom:1px solid black; padding: 15px;'>
+        <div class="row result-div">
           <div class="col-md-2 col-sm-2 col-xs-2">
             <img src="<%= optionResult.productImageUrl %>" alt="" style='width:100%;'/>
           </div>
           <div class="col-md-10 col-sm-10 col-xs-10">
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <%= optionResult.name %>
+              <span style='font-size:25px; font-weight:bold;'><%= optionResult.name %></span>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-              by <%= optionResult.user.firstName %> <%= optionResult.user.lastName %>
+              <span class='grey'>by </span><span class='light-blue'><%= optionResult.user.firstName %> <%= optionResult.user.lastName %></span>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <progress class="progress progress-info progress-bar-info" value="<%= optionResult.votes %>" max="<%= totalVotes %>"></progress>
+              <progress style='width:100%;' value="<%= optionResult.votes %>" max="<%= highestVotes %>"></progress>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12" style='text-align:right;'>
               <%= optionResult.votes %> votes
@@ -81,7 +87,6 @@
     </div>
 
     <div role="tabpanel" class="tab-pane" id="discussion">
-      DISCUSSION
     </div>
 
   </div>
