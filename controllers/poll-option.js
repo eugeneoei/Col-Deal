@@ -9,7 +9,7 @@ var app = express();
 app.use(express.static("static"));
 app.use(methodOverride('_method'));
 
-// app.use(isLoggedIn);
+app.use(isLoggedIn);
 
 // GET USER'S PROFILE AND LOAD ALL OF USER'S POLLS AND OPTIONS
 router.get('/profile', function(req,res) {

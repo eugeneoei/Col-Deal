@@ -18,20 +18,22 @@
       <div class="container">
         <div class="row">
           <% var discovers = result[0] %>
-          <% var minPoll = Math.min(discovers.length, 10) %>
+          <% var minPoll = Math.min(discovers.length, 8) %>
           <% for (var i = 0; i < minPoll; i++) { %>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="thumbnail">
-              <img src="<%= discovers[i].productImageUrl %>" alt="...">
-              <div class="caption">
-                <h4><%= discovers[i].name %></h4>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <%= discovers[i].numberOfPurchased %><br>
-                  Purchased
+          <a href="/drops/<%= discovers[i].id %>">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="thumbnail">
+                <img src="<%= discovers[i].productImageUrl %>" alt="...">
+                <div class="caption">
+                  <h4><%= discovers[i].name %></h4>
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <%= discovers[i].numberOfPurchased %><br>
+                    Purchased
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
           <% } %>
         </div>
       </div>
@@ -48,18 +50,20 @@
         <div class="row">
           <% var drops = result[0] %>
           <% drops.forEach(function(drop) { %>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="thumbnail">
-              <img src="<%= drop.productImageUrl %>" alt="...">
-              <div class="caption">
-                <h4><%= drop.name %></h4>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <%= drop.numberOfPurchased %><br>
-                  Purchased
+          <a href="/drops/<%= discovers[i].id %>">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="thumbnail">
+                <img src="<%= drop.productImageUrl %>" alt="...">
+                <div class="caption">
+                  <h4><%= drop.name %></h4>
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <%= drop.numberOfPurchased %><br>
+                    Purchased
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
           <% }) %>
         </div>
       </div>

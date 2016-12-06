@@ -82,6 +82,9 @@ app.get('/home', function(req,res) {
 
 app.use('/', require('./controllers/poll-option'));
 
+app.use('/', require('./controllers/drop'));
+
+
 var server = app.listen(process.env.PORT || 3000);
 
 module.exports = server;
