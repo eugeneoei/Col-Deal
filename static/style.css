@@ -14,6 +14,10 @@
   color: #7f7f7f;
 }
 
+.light-grey {
+  color: #e5e5e5;
+}
+
 .user-icon {
   font-size: 30px !important;
   line-height: 100% !important;
@@ -312,4 +316,93 @@ progress[value]::-webkit-progress-value {
   outline: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+#add-option-thumbnail:hover {
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+  transform: scale(1.025);
+}
+
+.comment:hover {
+  color: #00aeda
+}
+
+.community-select {
+  height: 40px;
+  background-color: white;
+  border-color: #e5e5e5;
+  width: 100%;
+}
+
+
+/* to remove blue glow shadow */
+.community-select:focus,
+.community-select:active,
+.community-select.active,
+.community-select:focus:active {
+  background-image: none;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.create-poll-input {
+  border-radius: 5px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #e5e5e5;
+  padding: 15px;
+}
+
+/* to remove blue glow shadow */
+.remove-glow:focus,
+.remove-glow:active,
+.remove-glow.active,
+.remove-glow:active {
+  background-image: none;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.create-poll-input-margin {
+  margin-bottom: 25px;
+}
+
+.back-button {
+  letter-spacing: 2px;
+  border: 1px solid #7f7f7f;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.back-button:hover {
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+  transform: scale(1.1);
+}
+
+.padding-zero {
+  padding: 0;
+}
+
+.create-poll-button {
+  /*width: 100%;*/
+  border: none;
+  background-color: #00aeda;
+  color: white;
+  padding: 10px;
+  letter-spacing: 3px;
+  border: none;
+  border-radius: 2px;
+}
+
+.create-poll-button:hover {
+  background-color: #00aeda !important;
+  color: white !important;
+  transition: all .5s ease-in-out;
+  transform: scale(1.1);
 }

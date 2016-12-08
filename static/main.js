@@ -14,6 +14,7 @@ $("document").ready(function(){
   // CREATE POLL HIDE SHOW TOGGLE
   $('#create-form-container').hide();
   $('.new-poll-button').on('click', function() {
+    $('#footer').css('border-top', '1px solid #e5e5e5');
     $('body').css('background-color', 'white');
     $('#create-form-container').show();
     $('#main-container').hide();

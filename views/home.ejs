@@ -38,11 +38,11 @@
                     <strong><%= discovers[i].numberOfPurchased %></strong> Purchased <span style='float:right;'><%= discovers[i].productPrice %></span>
                   </p>
                   <p style='border-top:1px solid grey !important; padding-top:3vh;'>
-                    <%= comment %><span class="glyphicon glyphicon-comment" aria-hidden="true" style='margin-left:5px;'></span>
+                    <span class='comment grey'><span class="glyphicon glyphicon-comment" aria-hidden="true" style='margin:0 5px;'></span><%= comment %></span>
                     <% if (time === 0) { %>
-                      <span style='float:right;'><span class="glyphicon glyphicon-time" aria-hidden="true" style='margin-left:5px;'></span> 1d &nbsp LEFT</span>
+                      <span class='grey' style='float:right;'><span class="glyphicon glyphicon-time" aria-hidden="true" style='margin-left:5px;'></span> 1d &nbsp LEFT</span>
                     <% } else { %>
-                      <span style='float:right;'><span class="glyphicon glyphicon-time" aria-hidden="true" style='margin-left:5px;'></span> <%= time %>d &nbsp LEFT</span>
+                      <span class='grey' style='float:right;'><span class="glyphicon glyphicon-time" aria-hidden="true" style='margin-left:5px;'></span> <%= time %>d &nbsp LEFT</span>
                     <% } %>
                   </p>
                   <!-- <p>
@@ -82,11 +82,11 @@
                     <strong><%= drop.numberOfPurchased %></strong> Purchased <span style='float:right;'><%= drop.productPrice %></span>
                   </p>
                   <p style='border-top:1px solid grey !important; padding-top:3vh;'>
-                    <%= comment %><span class="glyphicon glyphicon-comment" aria-hidden="true" style='margin-left:5px;'></span>
+                    <span class='comment grey'><span class="glyphicon glyphicon-comment" aria-hidden="true" style='margin:0 5px;'></span> <%= comment %></span>
                     <% if (time === 0) { %>
-                      <span style='float:right;'><span class="glyphicon glyphicon-time" aria-hidden="true" style='margin-left:5px;'></span> 1d &nbsp LEFT</span>
+                      <span class='grey' style='float:right;'><span class="glyphicon glyphicon-time" aria-hidden="true" style='margin-left:5px;'></span> 1d &nbsp LEFT</span>
                     <% } else { %>
-                      <span style='float:right;'><span class="glyphicon glyphicon-time" aria-hidden="true" style='margin-left:5px;'></span> <%= time %>d &nbsp LEFT</span>
+                      <span class='grey' style='float:right;'><span class="glyphicon glyphicon-time" aria-hidden="true" style='margin-left:5px;'></span> <%= time %>d &nbsp LEFT</span>
                     <% } %>
                   </p>
                   <!-- <p>
@@ -129,7 +129,7 @@
         <button class="btn btn-default" type="submit">START A NEW POLL</button>
       </div> -->
       <div class="container hidden-xs lato" style='padding:0;'>
-        <div class="col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-3 col-xs-offset-9" style='padding:0; margin-bottom:2%;'>
+        <div class="col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-8 col-xs-3 col-xs-offset-9" style='padding:0; margin-bottom:2%;'>
           <button class="new-poll-button" type="submit">START A NEW POLL</button>
         </div>
       </div>
@@ -289,47 +289,70 @@
 
 </div>
 
-<div id='create-form-container'class="container">
+<div id='create-form-container' class="container lato">
   <div class="container">
-    <div class="row" style='border-bottom:1px solid black;'>
-      Start A New Poll <br>
-      Search before creating a poll as it may already be on Col-Deal.
+    <div class="row" style='border-bottom:1px solid #e5e5e5; margin-bottom:25px;'>
+      <h2>Start A New Poll</h2> <br>
+      <p class='light-blue' style='margin-bottom: 15px;'>Search before creating a poll as it may already be on Col-Deal.</p>
     </div>
     <form action='/polls' method="post">
       <div class="row">
-        Which Community do your products belong to?<br>
-        <% var communities = result[2] %>
-        <select name="community">
-          <option>Choose a Community</option>
-          <% communities.forEach(function(community) { %>
-          <option value="<%= community.dataValues.name %>"><%= community.dataValues.name %></option>
-          <% }) %>
-        </select>
+        <div class="col-md-6 col-sm-6 col-xs-12 padding-zero">
+          <h2>Which Community do your products belong to?<br></h2>
+          <% var communities = result[2] %>
+          <div class="container" style='padding: 0 !important;'>
+          </div>
+          <select name="community" class='community-select'>
+            <option>Choose a Community</option>
+            <% communities.forEach(function(community) { %>
+              <option value="<%= community.dataValues.name %>"><%= community.dataValues.name %></option>
+              <% }) %>
+            </select>
+          </div>
       </div>
       <hr>
       <div class="row">
-        Title of Your Poll<br>
-        <em>What type of products are you interested in?</em><br>
-        <input type="text" name="poll"><br>
+        <div class="col-md-6 col-sm-6 col-xs-12 padding-zero">
+          <span style='font-size:20px;'>Title of Your Poll</span><br>
+          <span class='grey'><em>What type of products are you interested in?</em></span><br>
+          <input class='create-poll-input remove-glow' type="text" name="poll" style='margin-top: 25px;'><br>
+        </div>
       </div>
       <hr>
-      <div class=" row col-md-4 col-sm-4 col-xs-4">
-        Name<br>
-        <input type="text" name="name"><br>
-        Description<br>
-        <input type="text" name="productDescription"><br>
-        Retail Price<br>
-        <input type="text" name="productRetailsPrice"><br>
-        Product Link<br>
-        <input type="text" name="productUrl"><br>
-        Product Image URL<br>
-        <input type="text" name="productImageUrl"><br>
-        <button type="submit" class="btn btn-default" name="button">SUBMIT</button>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 padding-zero">
+          <div class="create-poll-input-margin" style='font-size:20px;'>
+            Share an Option
+          </div>
+          <div class="create-poll-input-margin">
+            Name<br>
+            <input class='create-poll-input remove-glow' type="text" name="name"><br>
+          </div>
+          <div class="create-poll-input-margin">
+            Description<br>
+            <input class='create-poll-input remove-glow' type="text" name="productDescription"><br>
+          </div>
+          <div class="create-poll-input-margin">
+            Retail Price<br>
+            <input class='create-poll-input remove-glow' type="text" name="productRetailsPrice"><br>
+          </div>
+          <div class="create-poll-input-margin">
+            Product Link<br>
+            <input class='create-poll-input remove-glow' type="text" name="productUrl"><br>
+          </div>
+          <div class="create-poll-input-margin">
+            Product Image URL<br>
+            <input class='create-poll-input remove-glow' type="text" name="productImageUrl"><br>
+          </div>
+          <button type="submit" class="btn btn-default remove-glow create-poll-button col-md-8 col-sm-12 col-xs-12" name="button">SUBMIT POLL</button>
+        </div>
       </div>
     </form>
   </div>
-  <div id='back'>
-    back
+  <div class="row" style='padding: 15px; margin-bottom: 20px;'>
+    <div id='back' class='back-button col-md-4 col-sm-6 col-xs-12'>
+      BACK
+    </div>
   </div>
 </div>
 
