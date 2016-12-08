@@ -18,6 +18,10 @@
   color: #e5e5e5;
 }
 
+.green {
+  color: #88c100;
+}
+
 .user-icon {
   font-size: 30px !important;
   line-height: 100% !important;
@@ -359,7 +363,7 @@ progress[value]::-webkit-progress-value {
 .remove-glow:focus,
 .remove-glow:active,
 .remove-glow.active,
-.remove-glow:active {
+.remove-glow:focus:active {
   background-image: none;
   outline: none;
   -webkit-box-shadow: none;
@@ -405,4 +409,80 @@ progress[value]::-webkit-progress-value {
   color: white !important;
   transition: all .5s ease-in-out;
   transform: scale(1.1);
+}
+
+.drop-description {
+  padding: 50px;
+  font-size: 16px;
+}
+
+.pill {
+  font-size: 28px;
+  /*border: 1px solid black;*/
+  padding: 15px;
+  border-radius: 25px;
+  background-color: #00aeda;
+  color: white;
+}
+
+.pill-xs {
+  font-size: 18px;
+  /*border: 1px solid black;*/
+  padding: 10px;
+  border-radius: 25px;
+  background-color: #00aeda;
+  color: white;
+}
+
+.join-drop-days-left-div {
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 15px;
+}
+
+.join-drop-button {
+  width:100%;
+  background-color: #88c100;
+  color: white;
+  padding: 15px;
+  letter-spacing: 2px;
+  border: none;
+  text-align: center;
+}
+
+.join-drop-button:hover {
+  border:none;
+  background-color: #88c100;
+  color: white;
+  transition: all .5s ease-in-out;
+  transform: scale(1.1);
+}
+
+.shopping-cart {
+  text-align: center;
+  font-size: 24px;
+  color: #88c100;
+}
+
+.join-drop-div-sm {
+  margin: 3% 0;
+}
+
+.shopping-cart-sm {
+  text-align: center;
+  font-size: 24px;
+  color: #88c100;
+  margin-top: 20px;
+}
+
+.join-drop-button-xs {
+  transform: scale(1.025);
+}
+
+.shopping-cart-xs {
+  text-align: center;
+  font-size: 24px;
+  color: #88c100;
 }
