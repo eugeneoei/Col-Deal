@@ -108,12 +108,13 @@
 
 </div>
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 
   $(document).on("click", ".edit-option-button", function() {
     $('#edit-option-form').remove();
     $('#profile-tab-content').hide();
-    $('#footer').css('border-top', '1px solid #e5e5e5');
+    // $('#footer').css('border-top', '1px solid #e5e5e5');
+    // $('#footer').css('background-color', '#e5e5e5');
     $('body').css('background-color', 'white');
 
     $.ajax({
@@ -121,21 +122,39 @@
       method: "GET"
     }).done(function(dataFromServer) {
       $('#profile-container').append(
-        '<div id="edit-option-form" class="row col-md-4 col-sm-4 col-xs-4">' +
-          '<form action="/options/' + dataFromServer.id + '?_method=PUT" method="post">' +
-            dataFromServer.name + '<br>' +
-            'Description<br>' +
-            '<input type="text" name="productDescription" value="' + dataFromServer.productDescription + '"><br>' +
-            'Retail Price<br>' +
-            '<input type="text" name="productRetailsPrice" value="' + dataFromServer.productRetailsPrice + '"><br>' +
-            'Product Link<br>' +
-            '<input type="text" name="productUrl" value="' + dataFromServer.productUrl + '"><br>' +
-            'Product Image URL<br>' +
-            '<input type="text" name="productImageUrl" value="' + dataFromServer.productImageUrl + '"><br>' +
-            '<button type="submit" class="btn btn-default" name="button">SUBMIT</button>' +
-          '</form><br>' +
-          '<div id="profile-back">' +
-          'Back' +
+        '<div class="container lato" id="edit-option-form">' +
+          '<div class="container">' +
+            '<div class="row" style="border-bottom:1px solid #e5e5e5; margin-bottom:25px;">' +
+              '<h2>' + dataFromServer.name + '</h2>' +
+            '</div>' +
+            '<form action="/options/' + dataFromServer.id + '?_method=PUT" method="post">' +
+              '<div class="row">' +
+                '<div class="col-md-6 col-sm-6 col-xs-12 padding-zero">' +
+                  '<div class="create-poll-input-margin">' +
+                    'Description<br>' +
+                    '<input class="create-poll-input remove-glow" type="text" name="productDescription" value="' + dataFromServer.productDescription + '"><br>' +
+                  '</div>' +
+                  '<div class="create-poll-input-margin">' +
+                    'Retail Price<br>' +
+                    '<input class="create-poll-input remove-glow" type="text" name="productRetailsPrice" value="' + dataFromServer.productRetailsPrice + '"><br>' +
+                  '</div>' +
+                  '<div class="create-poll-input-margin">' +
+                    'Product Link<br>' +
+                    '<input class="create-poll-input remove-glow" type="text" name="productUrl" value="' + dataFromServer.productUrl + '"><br>' +
+                  '</div>' +
+                  '<div class="create-poll-input-margin">' +
+                    'Product Image URL<br>' +
+                    '<input class="create-poll-input remove-glow" type="text" name="productImageUrl" value="' + dataFromServer.productImageUrl + '"><br>' +
+                  '</div>' +
+                  '<button type="submit" class="remove-glow create-poll-button col-md-8 col-sm-12 col-xs-12" name="button">SUBMIT</button>' +
+                '</div>' +
+              '</div>' +
+            '</form><br>' +
+          '</div>' +
+          '<div class="row" style="padding: 15px; margin-bottom: 20px;">' +
+            '<div id="profile-back" class="back-button col-md-4 col-sm-6 col-xs-12">' +
+              'BACK' +
+            '</div>' +
           '</div>' +
         '</div>'
       )
@@ -164,4 +183,4 @@
     $('#profile-tab-content').show();
   });
 
-</script> -->
+</script>
