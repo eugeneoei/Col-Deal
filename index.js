@@ -84,6 +84,8 @@ app.use('/', require('./controllers/poll-option'));
 
 app.use('/', require('./controllers/drop'));
 
+app.use('/', require('./controllers/vote'));
+
 
 var server = app.listen(process.env.PORT || 3000);
 
