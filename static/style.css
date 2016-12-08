@@ -486,3 +486,8 @@ progress[value]::-webkit-progress-value {
   font-size: 24px;
   color: #88c100;
 }
+
+.view-website:hover {
+  color: #00aeda;
+  text-decoration: underline;
+}

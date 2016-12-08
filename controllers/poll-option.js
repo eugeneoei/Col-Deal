@@ -54,6 +54,27 @@ router.put('/options/:id', function(req,res) {
   });
 });
 
+// CREATE new option
+router.post('/options', function(req,res) {
+  db.user.findOne({
+    where : { id:req.user.id }
+  }).then(function(user) {
+    var pollId = parseInt(req.body.pollId);
+    console.log('see here for poll id', pollId);
+    user.createOption({
+      name: req.body.name,
+      productUrl: req.body.productUrl,
+      productImageUrl: req.body.productImageUrl,
+      productDescription: req.body.productDescription,
+      productRetailsPrice: req.body.productRetailsPrice,
+      votes: '1',
+      pollId: pollId
+    }).then(function() {
+      res.redirect('/polls/' + pollId);
+    });
+  });
+});
+
 
 // GET USER'S PROFILE AND LOAD ALL OF USER'S POLLS AND OPTIONS
 // router.get('/profile', function(req,res) {
@@ -119,8 +140,11 @@ router.get('/polls/:id', function(req,res) {
     pollResult.push(poll);
     poll.getOptions({include: [db.user]}).then(function(options) {
       pollResult.push(options);
-      console.log('see here for one poll with all its options', options);
-      res.render('polls/poll_details', {pollResult:pollResult});
+      // console.log('see here for one poll with all its options', options);
+      db.community.findAll().then(function(communities) {
+        pollResult.push(communities)
+        res.render('polls/poll_details', {pollResult:pollResult});
+      })
     });
   });
 });

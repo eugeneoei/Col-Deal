@@ -1,16 +1,16 @@
 <!-- pollResult[0] is poll pollResult[1] is options -->
-<div class="container-fluid lato" style='background-color:white; margin-top:-4vh;'>
+<div class="container-fluid lato" style='background-color:white; margin-top:-4vh;' id='poll-title'>
   <div class="container">
     <h1 style='margin-bottom:14px;'><%= pollResult[0].name %></h1>
     <p>by <span class='light-blue'><%= pollResult[0].user.firstName %> <%= pollResult[0].user.lastName %></span></p>
   </div>
 </div>
 
-<div class='lato'>
+<div class='lato' id='options-container'>
 
 
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
+  <ul class="nav nav-tabs" role="tablist" id='nav-tab'>
     <li role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#voting" aria-controls="home" role="tab" data-toggle="tab">VOTING</a></li>
     <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#results" aria-controls="profile" role="tab" data-toggle="tab">RESULTS</a></li>
     <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#discussion" aria-controls="messages" role="tab" data-toggle="tab">DISCUSSION</a></li>
@@ -33,7 +33,7 @@
                 <div style='height:15vh;'>
                   <span style='font-size:20px; font-weight:bold;'><%= option.name %></span>
                 </div>
-                <a href='<%= option.productUrl %>'>VIEW WEBSITE</a>
+                <a href='<%= option.productUrl %>'><span class='view-website grey'>VIEW WEBSITE</span></a>
                 <p><span class='grey'>by </span><span class='light-blue'><%= option.user.firstName %> <%= option.user.lastName %></span></p>
                 <button class="vote-option-button" type="submit" style='width:100%;'>VOTE</button>
               </div>
@@ -99,4 +99,76 @@
 
   </div>
 
+</div>
+
+<!-- CREATE NEW OPTION FOR POLL-->
+<div class="container lato" id='add-option-form'>
+  <div class="container">
+    <div class="row" style='border-bottom:1px solid #e5e5e5; margin-bottom:25px;'>
+      <h2>Create A New Option</h2> <br>
+      <p class='light-blue' style='margin-bottom: 15px;'>Browse before creating an option as it may have already been suggested by other users.</p>
+    </div>
+    <form action='/options' method="post">
+      <!-- <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 padding-zero">
+          <h2>Which Community do your products belong to?<br></h2>
+          <% var communities = pollResult[2] %>
+          <select name="community" class='community-select'>
+            <option>Choose a Community</option>
+            <% communities.forEach(function(community) { %>
+            <option value="<%= community.dataValues.name %>"><%= community.dataValues.name %></option>
+            <% }) %>
+          </select>
+        </div>
+      </div> -->
+      <!-- <hr> -->
+      <!-- <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 padding-zero">
+          <span style='font-size:20px;'>Title of Your Poll</span><br>
+          <span class='grey'><em>What type of products are you interested in?</em></span><br>
+          <input class='create-poll-input remove-glow' type="text" name="poll" style='margin-top: 25px;'><br>
+        </div>
+      </div>
+      <hr> -->
+      <input type="hidden" name="pollId" value="<%= pollResult[0].id %>">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 padding-zero">
+          <!-- <div class="create-poll-input-margin" style='font-size:20px;'>
+            Share an Option
+          </div> -->
+          <div class="create-poll-input-margin">
+            Name<br>
+            <input class='create-poll-input remove-glow' type="text" name="name"><br>
+          </div>
+          <div class="create-poll-input-margin">
+            Description<br>
+            <input class='create-poll-input remove-glow' type="text" name="productDescription"><br>
+          </div>
+          <div class="create-poll-input-margin">
+            Retail Price<br>
+            <input class='create-poll-input remove-glow' type="text" name="productRetailsPrice"><br>
+          </div>
+          <div class="create-poll-input-margin">
+            Product Link<br>
+            <input class='create-poll-input remove-glow' type="text" name="productUrl"><br>
+          </div>
+          <div class="create-poll-input-margin">
+            Product Image URL<br>
+            <input class='create-poll-input remove-glow' type="text" name="productImageUrl"><br>
+          </div>
+          <button type="submit" class="remove-glow create-poll-button col-md-8 col-sm-12 col-xs-12" name="button">SUBMIT OPTION</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- <div class="" id='back-option'>
+    BACK
+  </div> -->
+
+  <div class="row" style='padding: 15px; margin-bottom: 20px;'>
+    <div id='back-option' class='back-button col-md-4 col-sm-6 col-xs-12'>
+      BACK
+    </div>
+  </div>
 </div>

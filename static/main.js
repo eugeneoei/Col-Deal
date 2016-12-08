@@ -25,5 +25,23 @@ $("document").ready(function(){
     $('#main-container').show();
   });
 
+  // ADD AN OPTION HIDE SHOW TOGGLE
+  $('#add-option-form').hide();
+  $('#add-option-thumbnail').on('click', function() {
+    $('#poll-title').hide();
+    $('#options-container').hide();
+    $('#add-option-form').show();
+    $('#footer').css('border-top', '1px solid #e5e5e5');
+    $('body').css('background-color', 'white');
+  });
+  $('#back-option').on('click', function() {
+    $('#poll-title').show();
+    $('#options-container').show();
+    $('#add-option-form').hide();
+    $('body').css('background-color', '#f4f4f4');
+    // $('#back-option').hide();
+  });
+
+
 
 });
