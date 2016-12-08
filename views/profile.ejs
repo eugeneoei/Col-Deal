@@ -32,11 +32,8 @@
 
     <!-- POLL STARTS -->
     <div role="tabpanel" class="tab-pane" id="polls">
-      polls
       <div class="container">
-
       </div>
-
       <% if (message) { %>
         <div class="container" style='text-align:center;'>
           <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
@@ -82,10 +79,7 @@
                       <% } else { %>
                         <p style='height:10vh;'>There are no price stated for this option at the moment.</p>
                       <% } %>
-                      <!-- <a class="btn btn-default edit-option" href="#" role="button" value='<%= option.id %>'>Edit Option</a> -->
-                      <!-- <div class="col-md-12 col-sm-12 col-xs-12"> -->
                         <button class="edit-option-button remove-glow" value='<%= option.id %>'>EDIT OPTION</button>
-                      <!-- </div> -->
                     </div>
                   </div>
                 </div>

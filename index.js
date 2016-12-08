@@ -63,7 +63,7 @@ app.get('/home', function(req,res) {
     result.push(drops);
     db.poll.findAll({
       include: [db.option, db.user],
-      order: [ [db.option, 'votes', 'DESC'] ]
+      order: [ [db.option, 'numberOfVotes', 'DESC'] ]
     }).then(function(polls) {
       result.push(polls);
       db.community.findAll().then(function(communities) {

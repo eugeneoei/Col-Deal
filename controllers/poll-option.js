@@ -67,7 +67,7 @@ router.post('/options', function(req,res) {
       productImageUrl: req.body.productImageUrl,
       productDescription: req.body.productDescription,
       productRetailsPrice: req.body.productRetailsPrice,
-      votes: '1',
+      numberOfVotes: '1',
       pollId: pollId
     }).then(function() {
       res.redirect('/polls/' + pollId);
@@ -120,7 +120,7 @@ router.post('/polls', function(req, res) {
           productDescription: req.body.productDescription,
           productRetailsPrice: req.body.productRetailsPrice,
           userId: req.user.id,
-          votes: '1'
+          numberOfVotes: '1'
         }).then(function() {
           res.redirect('/home')
         });

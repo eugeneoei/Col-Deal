@@ -61,10 +61,10 @@
     <div role="tabpanel" class="tab-pane" id="results">
       <div class="container poll-div lato">
         <% var optionsResults = pollResult[1] %>
-        <% var highestVotes = 0 %>
+        <% var highestnumberOfVotes = 0 %>
         <% for (var i = 0; i < optionsResults.length; i++) { %>
-          <% if (highestVotes < parseInt(options[i].votes)) { %>
-            <% highestVotes = parseInt(options[i].votes) %>
+          <% if (highestnumberOfVotes < parseInt(options[i].numberOfVotes)) { %>
+            <% highestnumberOfVotes = parseInt(options[i].numberOfVotes) %>
           <% } %>
         <% } %>
         <% optionsResults.forEach(function(optionResult) { %>
@@ -81,10 +81,10 @@
               <span class='grey'>by </span><span class='light-blue'><%= optionResult.user.firstName %> <%= optionResult.user.lastName %></span>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <progress style='width:100%;' value="<%= optionResult.votes %>" max="<%= highestVotes %>"></progress>
+              <progress style='width:100%;' value="<%= optionResult.numberOfVotes %>" max="<%= highestnumberOfVotes %>"></progress>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12" style='text-align:right;'>
-              <%= optionResult.votes %> votes
+              <%= optionResult.numberOfVotes %> votes
             </div>
           </div>
         </div>
@@ -141,3 +141,9 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('#voting').on('click', '.vote-option-button', function() {
+    console.log(this.textContent);
+  });
+</script>

@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     productImageUrl: DataTypes.TEXT,
     productDescription: DataTypes.TEXT,
     productRetailsPrice: DataTypes.STRING,
-    votes: DataTypes.STRING,
+    numberOfVotes: DataTypes.STRING,
     pollId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {
@@ -15,6 +15,7 @@ module.exports = function(sequelize, DataTypes) {
         // associations can be defined here
         models.option.belongsTo(models.user);
         models.option.belongsTo(models.poll);
+        models.option.hasMany(models.vote);
       }
     }
   });

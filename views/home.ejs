@@ -161,9 +161,9 @@
                   <span class='grey'>OPTIONS</span>
                 </div>
                 <% var numberOfOtherOptions = options.length - 3 %>
-                <% var totalVotes = 0 %>
+                <% var totalnumberOfVotes = 0 %>
                 <% for (var j = 0; j < minOptionsLength; j++) { %>
-                  <% totalVotes += parseInt(options[j].votes) %>
+                  <% totalnumberOfVotes += parseInt(options[j].numberOfVotes) %>
                 <% } %>
                 <% for (var j = 0; j < minOptionsLength; j++) { %>
                   <div class="col-md-12 col-sm-12" style='padding:0;'>
@@ -180,15 +180,15 @@
                               <%= rank %>
                             </div>
                             <div class="col-md-8 col-sm-8" style='text-align:right;'>
-                              <%= options[j].votes %> Votes
+                              <%= options[j].numberOfVotes %> votes
                             </div>
                           </div>
                           <div class="col-md-12 col-sm-12" style='padding:0;'>
                             <%= options[j].name %>
                           </div>
                           <div class="col-md-12 col-sm-12" style='padding:0; margin-top:2vh;'>
-                            <!-- <progress class="progress progress-info progress-bar-info" value="<%= options[j].votes %>" max="<%= totalVotes %>"></progress> -->
-                            <progress style='width:100%;' value="<%= options[j].votes %>" max="<%= totalVotes %>"></progress>
+                            <!-- <progress class="progress progress-info progress-bar-info" value="<%= options[j].numberOfVotes %>" max="<%= totalnumberOfVotes %>"></progress> -->
+                            <progress style='width:100%;' value="<%= options[j].numberOfVotes %>" max="<%= totalnumberOfVotes %>"></progress>
                           </div>
                         </div>
                         <% } %>
@@ -238,9 +238,9 @@
                 <span class='grey'>OPTIONS</span>
               </div>
               <% var numberOfOtherOptionsXS = optionsXS.length - 3 %>
-              <% var totalVotesXS = 0 %>
+              <% var totalnumberOfVotesXS = 0 %>
               <% for (var k = 0; k < minOptionsLengthXS; k++) { %>
-                <% totalVotesXS += parseInt(optionsXS[k].votes) %>
+                <% totalnumberOfVotesXS += parseInt(optionsXS[k].numberOfVotes) %>
                 <% } %>
                 <% for (var k = 0; k < minOptionsLengthXS; k++) { %>
                   <div class="col-xs-12" style='padding:0;'>
@@ -256,13 +256,13 @@
                             <%= rank %>
                           </div>
                           <div class="col-xs-8" style='text-align:right'>
-                            <%= optionsXS[k].votes %> votes
+                            <%= optionsXS[k].numberOfVotes %> numberOfVotes
                           </div>
                           <div class="col-xs-12" style='padding:0;'>
                             <%= optionsXS[k].name %>
                           </div>
                           <div class="col-xs-12" style='padding:0;'>
-                            <progress value="<%= optionsXS[k].votes %>" max="<%= totalVotesXS %>"></progress>
+                            <progress value="<%= optionsXS[k].numberOfVotes %>" max="<%= totalnumberOfVotesXS %>"></progress>
                           </div>
                         </div>
                         <% } %>

@@ -69,6 +69,7 @@ module.exports = function(sequelize, DataTypes) {
         models.user.hasMany(models.drop);
         models.user.hasMany(models.option);
         models.user.hasMany(models.poll);
+        models.user.hasMany(models.vote);
       }
     },
     instanceMethods: {
