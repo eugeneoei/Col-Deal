@@ -1,13 +1,17 @@
 <!-- <h1>this is user's profile</h1> -->
 <!-- result[0] is poll, result[1] is option -->
 
-<div id='profile-container'>
+<!-- <div class="container-fluid lato" style='background-color:white; margin-top:-5vh;'>
+
+</div> -->
+
+<div id='profile-container' class='lato' style='margin-top:-5vh;'>
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist" style='text-align:center; margin-bottom:2%;'>
-    <li role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#about" aria-controls="home" role="tab" data-toggle="tab">ABOUT</a></li>
-    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#drops" aria-controls="profile" role="tab" data-toggle="tab">DROPS</a></li>
-    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#polls" aria-controls="messages" role="tab" data-toggle="tab">POLLS</a></li>
+    <li id='about-tab' role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#about" aria-controls="home" role="tab" data-toggle="tab">ABOUT</a></li>
+    <li id='drops-tab' role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#drops" aria-controls="profile" role="tab" data-toggle="tab">DROPS</a></li>
+    <li id='polls-tab' role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#polls" aria-controls="messages" role="tab" data-toggle="tab">POLLS</a></li>
     <!-- <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#options" aria-controls="settings" role="tab" data-toggle="tab">OPTIONS</a></li> -->
   </ul>
 
@@ -62,14 +66,26 @@
               <% if(currentUser.id == option.userId) { %>
                 <div class="col-md-4 col-sm-6 col-xs-12">
                   <div class="thumbnail">
-                    <img src="<%= option.productImageUrl %>" alt="...">
+                    <img src="<%= option.productImageUrl %>" alt="..." style='height:50vh; width:100%;'>
                     <div class="caption">
-                      <h4><%= option.name %></h4>
-                      <a href='<%= option.productUrl %>'>View Product URL</a>
-                      <p><%= option.productDescription %></p>
-                      <p><%= option.productRetailsPrice %></p>
+                      <div style='height:15vh;'>
+                        <span style='font-size:20px; font-weight:bold;'><%= option.name %></span>
+                      </div>
+                      <a href='<%= option.productUrl %>'><p><span class='view-website grey'>VIEW PRODUCT URL</span></a></p>
+                      <% if (option.productDescription) { %>
+                        <p style='height:25vh;'><%= option.productDescription %></p>
+                      <% } else { %>
+                        <p style='height:25vh;'>There are no descripton for this option at the moment.</p>
+                      <% } %>
+                      <% if (option.productRetailsPrice) { %>
+                        <p style='height:10vh;'><%= option.productRetailsPrice %></p>
+                      <% } else { %>
+                        <p style='height:10vh;'>There are no price stated for this option at the moment.</p>
+                      <% } %>
                       <!-- <a class="btn btn-default edit-option" href="#" role="button" value='<%= option.id %>'>Edit Option</a> -->
-                      <button class="btn btn-default edit-option" value='<%= option.id %>'>Edit Option</button>
+                      <!-- <div class="col-md-12 col-sm-12 col-xs-12"> -->
+                        <button class="edit-option-button remove-glow" value='<%= option.id %>'>EDIT OPTION</button>
+                      <!-- </div> -->
                     </div>
                   </div>
                 </div>
@@ -92,11 +108,13 @@
 
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
-  $(document).on("click", ".edit-option", function() {
+  $(document).on("click", ".edit-option-button", function() {
     $('#edit-option-form').remove();
     $('#profile-tab-content').hide();
+    $('#footer').css('border-top', '1px solid #e5e5e5');
+    $('body').css('background-color', 'white');
 
     $.ajax({
       url: '/options/' + this.value + '/edit',
@@ -123,6 +141,8 @@
       )
       $(document).on('click', '#profile-back', function() {
         console.log('back button clicked');
+        $('body').css('background-color', '#f4f4f4');
+        $('#footer').css('border-top', 'none');
         $('#profile-back').hide();
         $('#edit-option-form').hide();
         $('#profile-tab-content').show();
@@ -132,4 +152,16 @@
     });
   });
 
-</script>
+  $('#about-tab').on('click', function() {
+    $('#profile-back').hide();
+    $('#edit-option-form').hide();
+    $('#profile-tab-content').show();
+  });
+
+  $('#drops-tab').on('click', function() {
+    $('#profile-back').hide();
+    $('#edit-option-form').hide();
+    $('#profile-tab-content').show();
+  });
+
+</script> -->

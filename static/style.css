@@ -22,6 +22,10 @@
   color: #88c100;
 }
 
+.dark-blue {
+  color:#0086a5;
+}
+
 .user-icon {
   font-size: 30px !important;
   line-height: 100% !important;
@@ -490,4 +494,18 @@ progress[value]::-webkit-progress-value {
 .view-website:hover {
   color: #00aeda;
   text-decoration: underline;
+}
+
+.edit-option-button {
+  width:100%;
+  background-color: #00aeda;
+  color: white;
+  padding: 15px;
+  letter-spacing: 2px;
+  border: none;
+  text-align: center;
+}
+
+.edit-option-button:hover {
+  background-color: #0086a5;
 }
