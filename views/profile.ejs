@@ -56,9 +56,6 @@
             <h1><%= poll.name %></h1>
             <% var options = poll.options %>
             <% options.forEach(function(option) { %>
-              <!-- <% if (options.length < 1) { %>
-              <% } else { %>
-              <% } %> -->
               <% if(currentUser.id == option.userId) { %>
                 <div class="col-md-4 col-sm-6 col-xs-12">
                   <div class="thumbnail">
@@ -93,97 +90,115 @@
 
     <!-- OPTION STARTS -->
     <div role="tabpanel" class="tab-pane" id="options">
-      <div class="container">
-        <% var options = profileResults[0] %>
-        <% for (var i = 0; i < options.length; i ++) { %>
-          <% if (i === 0) { %>
-            <div class="row poll-div" id='special-id-<%= options[i].poll.id %>'>
-              <h1><%= options[i].poll.name %></h1>
-              <div class="col-md-4 col-sm-6 col-xs-12" >
-                <div class="thumbnail">
-                  <img src="<%= options[i].productImageUrl %>" alt="..." style='height:50vh; width:100%;'>
-                  <div class="caption">
-                    <div style='height:15vh;'>
-                      <span style='font-size:20px; font-weight:bold;'><%= options[i].name %></span>
-                    </div>
-                    <a href='<%= options[i].productUrl %>'><p><span class='view-website grey'>VIEW PRODUCT URL</span></a></p>
-                    <% if (options[i].productDescription) { %>
-                      <p style='height:20vh;'><%= options[i].productDescription %></p>
-                    <% } else { %>
-                      <p style='height:20vh;'>There are no descripton for this option at the moment.</p>
-                    <% } %>
-                    <% if (options[i].productRetailsPrice) { %>
-                      <p style='height:10vh;'><%= options[i].productRetailsPrice %></p>
-                    <% } else { %>
-                      <p style='height:10vh;'>There are no price stated for this option at the moment.</p>
-                    <% } %>
-                    <button class="edit-option-button remove-glow" value='<%= options[i].id %>'>EDIT OPTION</button>
-                  </div>
-                </div>
+      <% if (optionMessage) { %>
+        <div class="container" style='text-align:center; margin-bottom:20px;'>
+          <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+            <div class="row">
+              <div class="col-md-12 roboto-font" style='font-size:100px;'>
+                <strong>Ooops!</strong>
               </div>
             </div>
-          <% } else if (options[i].poll.id === options[i-1].poll.id) { %>
-            <script type="text/javascript">
-              var option = <%- JSON.stringify(options[i]) %>;
-              var productDescription;
-              var productRetailsPrice;
-              if (option.productDescription) {
-                productDescription = '<p style="height:20vh;">' + option.productDescription + '</p>'
-              } else {
-                productDescription = '<p style="height:20vh;">There are no descripton for this option at the moment.</p>'
-              }
-              if (option.productRetailsPrice) {
-                productRetailsPrice = '<p style="height:10vh;">' + option.productRetailsPrice + '</p>'
-              } else {
-                productRetailsPrice = '<p style="height:10vh;">There are no price stated for this option at the moment.</p>'
-              }
-
-              $('#special-id-' + option.poll.id).append(
-                '<div class="col-md-4 col-sm-6 col-xs-12" >' +
-                  '<div class="thumbnail">' +
-                    '<img src="' + option.productImageUrl + '" alt="..." style="height:50vh; width:100%;">' +
-                    '<div class="caption">' +
-                      '<div style="height:15vh;">' +
-                        '<span style="font-size:20px; font-weight:bold;">' + option.name + '</span>' +
-                      '</div>' +
-                      '<a href="' + option.productUrl  + '"><p><span class="view-website grey">VIEW PRODUCT URL</span></a></p>' +
-                      productDescription +
-                      productRetailsPrice +
-                        '<button class="edit-option-button remove-glow" value="' + option.id + '">EDIT OPTION</button>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>'
-              );
-            </script>
-          <% } else { %>
-            <div class="row poll-div" id='special-id-<%= options[i].poll.id %>'>
-              <h1><%= options[i].poll.name %></h1>
-              <div class="col-md-4 col-sm-6 col-xs-12" >
-                <div class="thumbnail">
-                  <img src="<%= options[i].productImageUrl %>" alt="..." style='height:50vh; width:100%;'>
-                  <div class="caption">
-                    <div style='height:15vh;'>
-                      <span style='font-size:20px; font-weight:bold;'><%= options[i].name %></span>
-                    </div>
-                    <a href='<%= options[i].productUrl %>'><p><span class='view-website grey'>VIEW PRODUCT URL</span></a></p>
-                    <% if (options[i].productDescription) { %>
-                      <p style='height:20vh;'><%= options[i].productDescription %></p>
-                    <% } else { %>
-                      <p style='height:20vh;'>There are no descripton for this option at the moment.</p>
-                    <% } %>
-                    <% if (options[i].productRetailsPrice) { %>
-                      <p style='height:10vh;'><%= options[i].productRetailsPrice %></p>
-                    <% } else { %>
-                      <p style='height:10vh;'>There are no price stated for this option at the moment.</p>
-                    <% } %>
+            <div class="row">
+              <div class="col-md-12 roboto-font" style='font-size:25px;'>
+                <%= optionMessage %>
+                <a href="/home" class='click-here'><span class='grow'>Click here</span></a> and create one!
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="container">
+          <% var options = profileResults[0] %>
+          <% for (var i = 0; i < options.length; i ++) { %>
+            <% if (i === 0) { %>
+              <div class="row poll-div" id='special-id-<%= options[i].poll.id %>'>
+                <h1><%= options[i].poll.name %></h1>
+                <div class="col-md-4 col-sm-6 col-xs-12" >
+                  <div class="thumbnail">
+                    <img src="<%= options[i].productImageUrl %>" alt="..." style='height:50vh; width:100%;'>
+                    <div class="caption">
+                      <div style='height:15vh;'>
+                        <span style='font-size:20px; font-weight:bold;'><%= options[i].name %></span>
+                      </div>
+                      <a href='<%= options[i].productUrl %>'><p><span class='view-website grey'>VIEW PRODUCT URL</span></a></p>
+                      <% if (options[i].productDescription) { %>
+                        <p style='height:20vh;'><%= options[i].productDescription %></p>
+                      <% } else { %>
+                        <p style='height:20vh;'>There are no descripton for this option at the moment.</p>
+                      <% } %>
+                      <% if (options[i].productRetailsPrice) { %>
+                        <p style='height:10vh;'><%= options[i].productRetailsPrice %></p>
+                      <% } else { %>
+                        <p style='height:10vh;'>There are no price stated for this option at the moment.</p>
+                      <% } %>
                       <button class="edit-option-button remove-glow" value='<%= options[i].id %>'>EDIT OPTION</button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            <% } else if (options[i].poll.id === options[i-1].poll.id) { %>
+              <script type="text/javascript">
+                var option = <%- JSON.stringify(options[i]) %>;
+                var productDescription;
+                var productRetailsPrice;
+                if (option.productDescription) {
+                  productDescription = '<p style="height:20vh;">' + option.productDescription + '</p>'
+                } else {
+                  productDescription = '<p style="height:20vh;">There are no descripton for this option at the moment.</p>'
+                }
+                if (option.productRetailsPrice) {
+                  productRetailsPrice = '<p style="height:10vh;">' + option.productRetailsPrice + '</p>'
+                } else {
+                  productRetailsPrice = '<p style="height:10vh;">There are no price stated for this option at the moment.</p>'
+                }
+
+                $('#special-id-' + option.poll.id).append(
+                  '<div class="col-md-4 col-sm-6 col-xs-12" >' +
+                    '<div class="thumbnail">' +
+                      '<img src="' + option.productImageUrl + '" alt="..." style="height:50vh; width:100%;">' +
+                      '<div class="caption">' +
+                        '<div style="height:15vh;">' +
+                          '<span style="font-size:20px; font-weight:bold;">' + option.name + '</span>' +
+                        '</div>' +
+                        '<a href="' + option.productUrl  + '"><p><span class="view-website grey">VIEW PRODUCT URL</span></a></p>' +
+                        productDescription +
+                        productRetailsPrice +
+                          '<button class="edit-option-button remove-glow" value="' + option.id + '">EDIT OPTION</button>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>'
+                );
+              </script>
+            <% } else { %>
+              <div class="row poll-div" id='special-id-<%= options[i].poll.id %>'>
+                <h1><%= options[i].poll.name %></h1>
+                <div class="col-md-4 col-sm-6 col-xs-12" >
+                  <div class="thumbnail">
+                    <img src="<%= options[i].productImageUrl %>" alt="..." style='height:50vh; width:100%;'>
+                    <div class="caption">
+                      <div style='height:15vh;'>
+                        <span style='font-size:20px; font-weight:bold;'><%= options[i].name %></span>
+                      </div>
+                      <a href='<%= options[i].productUrl %>'><p><span class='view-website grey'>VIEW PRODUCT URL</span></a></p>
+                      <% if (options[i].productDescription) { %>
+                        <p style='height:20vh;'><%= options[i].productDescription %></p>
+                      <% } else { %>
+                        <p style='height:20vh;'>There are no descripton for this option at the moment.</p>
+                      <% } %>
+                      <% if (options[i].productRetailsPrice) { %>
+                        <p style='height:10vh;'><%= options[i].productRetailsPrice %></p>
+                      <% } else { %>
+                        <p style='height:10vh;'>There are no price stated for this option at the moment.</p>
+                      <% } %>
+                        <button class="edit-option-button remove-glow" value='<%= options[i].id %>'>EDIT OPTION</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% } %>
           <% } %>
-        <% } %>
-      </div>
+        </div>
+      <% } %>
     </div>
     <!-- OPTION ENDS -->
 

@@ -22,18 +22,23 @@ router.get('/profile', function(req,res) {
       order: [['pollId', 'DESC']]
     }).then(function(options) {
       profileResults.push(options);
-      console.log('see here please >>>>', profileResults[0]);
+      // console.log('see here please >>>>', profileResults[0]);
       db.poll.findAll({
         where: { userId: req.user.id },
         include: [db.option],
         order: [['createdAt', 'DESC']]
       }).then(function(polls) {
         profileResults.push(polls);
-        if (polls.length < 1) {
+        if (polls.length < 1 && profileResults[0].length < 1) {
           // if user has not created any post, flash this message
-          res.render('profile', {pollMessage: 'Seems like you have not created any polls yet.'})
+          res.render('profile', {profileResults: profileResults, pollMessage: 'Seems like you have not created any polls yet.', optionMessage: 'Seems like you have not created any options yet.'})
+        } else if (polls.length < 1) {
+          console.log('you should appear');
+          res.render('profile', {profileResults: profileResults, pollMessage: 'Seems like you have not created any polls yet.', optionMessage: ''})
+        } else if (profileResults[0].length < 1) {
+          res.render('profile', {profileResults: profileResults, pollMessage: '', optionMessage: 'Seems like you have not created any options yet.'})
         } else {
-          res.render('profile', {profileResults: profileResults, pollMessage: ''})
+          res.render('profile', {profileResults: profileResults, pollMessage: '', optionMessage: ''})
         }
       });
     });
