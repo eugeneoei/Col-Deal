@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       numberOfVotes: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       pollId: {
         type: Sequelize.INTEGER

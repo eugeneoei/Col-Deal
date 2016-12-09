@@ -71,7 +71,7 @@ app.get('/home', function(req,res) {
         res.render('home', {result:result});
         // console.log('see here for drops >>>>>', result[0]);
         // console.log('see here for polls >>>>>', result[1][0].user);
-        // console.log('see here for options >>>>>', result[1][0].options[0]);
+        console.log('see here for options >>>>>', result[1][1].options);
         // console.log('see here for categories >>>>>', result[2]);
         // console.log('see here for should not have anything >>>>>', result[3]);
       });

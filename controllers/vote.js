@@ -23,7 +23,8 @@ router.post('/polls/options/:id/vote', function(req,res) {
       db.option.findOne({
         where: { id: req.params.id }
       }).then(function(option) {
-        var oldVotes = parseInt(option.numberOfVotes);
+        // var oldVotes = parseInt(option.numberOfVotes);
+        var oldVotes = option.numberOfVotes;
         newVotes = oldVotes + 1;
       }).then(function() {
         db.option.update({
@@ -51,7 +52,8 @@ router.delete('/polls/options/:id/vote', function(req,res) {
     db.option.findOne({
       where: { id:req.params.id }
     }).then(function(option) {
-      var oldVotes = parseInt(option.numberOfVotes);
+      // var oldVotes = parseInt(option.numberOfVotes);
+      var oldVotes = option.numberOfVotes;
       newVotes = oldVotes - 1;
     }).then(function() {
       db.option.update({
