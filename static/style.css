@@ -94,9 +94,9 @@ a:active {
   border-radius: 15px;
 }
 
-/*.progress-bar-info {
-  width: 100% !important;
-}*/
+progress {
+  width: 100%;
+}
 
 .thumbnail {
   padding: 0 !important;

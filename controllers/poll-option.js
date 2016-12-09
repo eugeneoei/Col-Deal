@@ -23,19 +23,19 @@ router.get('/profile', function(req,res) {
     }).then(function(options) {
       profileResults.push(options);
       // console.log('see here please >>>>', profileResults[0]);
-      db.poll.findAll({
-        where: { userId: req.user.id },
+      // note that you can still use user found during the first query
+      user.getPolls({
         include: [db.option],
         order: [['createdAt', 'DESC']]
       }).then(function(polls) {
         profileResults.push(polls);
-        if (polls.length < 1 && profileResults[0].length < 1) {
-          // if user has not created any post, flash this message
+        // set different conditions to show different messages in each tab
+        // note that options exists still from the previous promise
+        if (polls.length < 1 && options.length < 1) {
           res.render('profile', {profileResults: profileResults, pollMessage: 'Seems like you have not created any polls yet.', optionMessage: 'Seems like you have not created any options yet.'})
         } else if (polls.length < 1) {
-          console.log('you should appear');
           res.render('profile', {profileResults: profileResults, pollMessage: 'Seems like you have not created any polls yet.', optionMessage: ''})
-        } else if (profileResults[0].length < 1) {
+        } else if (options.length < 1) {
           res.render('profile', {profileResults: profileResults, pollMessage: '', optionMessage: 'Seems like you have not created any options yet.'})
         } else {
           res.render('profile', {profileResults: profileResults, pollMessage: '', optionMessage: ''})
@@ -95,7 +95,7 @@ router.post('/options', function(req,res) {
       productImageUrl: req.body.productImageUrl,
       productDescription: req.body.productDescription,
       productRetailsPrice: req.body.productRetailsPrice,
-      numberOfVotes: '1',
+      numberOfVotes: 1,
       pollId: pollId
     }).then(function() {
       res.redirect('/polls/' + pollId);
@@ -151,7 +151,7 @@ router.post('/polls', function(req, res) {
           productDescription: req.body.productDescription,
           productRetailsPrice: req.body.productRetailsPrice,
           userId: req.user.id,
-          numberOfVotes: '1'
+          numberOfVotes: 1
         }).then(function() {
           res.redirect('/home')
         });

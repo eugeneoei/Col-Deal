@@ -313,7 +313,11 @@
                         <%= rank %>
                       </div>
                       <div class="col-md-8 col-sm-8" style='text-align:right;'>
-                        <%= options[j].numberOfVotes %> votes
+                        <% if (options[j].numberOfVotes > 1) { %>
+                          <%= options[j].numberOfVotes %> votes
+                        <% } else { %>
+                          <%= options[j].numberOfVotes %> vote
+                        <% } %>
                       </div>
                     </div>
                     <div class="col-md-12 col-sm-12" style='padding:0;'>
@@ -390,7 +394,11 @@
                     <%= rank %>
                   </div>
                   <div class="col-xs-8" style='text-align:right'>
-                    <%= optionsXS[k].numberOfVotes %> votes
+                    <% if (optionsXS[k].numberOfVotes > 1) { %>
+                      <%= optionsXS[k].numberOfVotes %> votes
+                    <% } else { %>
+                      <%= optionsXS[k].numberOfVotes %> vote
+                    <% } %>
                   </div>
                   <div class="col-xs-12" style='padding:0;'>
                     <%= optionsXS[k].name %>
@@ -404,7 +412,11 @@
                 <% // do nothing %>
               <% } else { %>
                 <div class="col-xs-12 grey other-option-button">
-                  +<%= numberOfOtherOptionsXS %> OTHER OPTIONS
+                  <% if (numberOfOtherOptionsXS > 1) { %>
+                    +<%= numberOfOtherOptionsXS %> OTHER OPTIONS
+                  <% } else { %>
+                    +<%= numberOfOtherOptionsXS %> OTHER OPTION
+                  <% } %>
                 </div>
               <% } %>
             <% } %>
