@@ -74,7 +74,30 @@ app.get('/home', function(req,res) {
         // console.log('see here for options >>>>>', result[1][0].options[0]);
         // console.log('see here for categories >>>>>', result[2]);
         // console.log('see here for should not have anything >>>>>', result[3]);
+      });
+    });
+  });
+});
 
+app.get('/home/polls', function(req,res) {
+  var result = [];
+  db.drop.findAll({
+    order: [['createdAt', 'ASC']]
+  }).then(function(drops) {
+    result.push(drops);
+    db.poll.findAll({
+      include: [db.option, db.user],
+      order: [ [db.option, 'numberOfVotes', 'DESC'] ]
+    }).then(function(polls) {
+      result.push(polls);
+      db.community.findAll().then(function(communities) {
+        result.push(communities);
+        res.render('home-polls', {result:result, status:true});
+        // console.log('see here for drops >>>>>', result[0]);
+        // console.log('see here for polls >>>>>', result[1][0].user);
+        // console.log('see here for options >>>>>', result[1][0].options[0]);
+        // console.log('see here for categories >>>>>', result[2]);
+        // console.log('see here for should not have anything >>>>>', result[3]);
       });
     });
   });
