@@ -12,20 +12,20 @@
     <link rel="stylesheet" href="/index.css">
   </head>
   <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default lato">
       <div class="container-fluid">
         <div class="navbar-header col-md-12 col-sm-12 col-xs-12">
-          <p class="navbar-text pull-right lato hidden-xs"><button class="btn btn-default button-no-glow auth-button" data-toggle="modal" data-target="#log-in-modal">LOG IN</button></p>
-          <p class="navbar-text pull-right lato hidden-xs"><button class="btn btn-default button-no-glow auth-button" data-toggle="modal" data-target="#sign-up-modal">SIGN UP</button></p>
+          <p class="navbar-text pull-right hidden-xs"><button class="btn btn-default button-no-glow auth-button" data-toggle="modal" data-target="#log-in-modal">LOG IN</button></p>
+          <p class="navbar-text pull-right hidden-xs"><button class="btn btn-default button-no-glow auth-button" data-toggle="modal" data-target="#sign-up-modal">SIGN UP</button></p>
           <p class="navbar-text pull-right pacifico hidden-xs" style='font-size:35px; color:grey;'>Col-Deal</p>
-          <div class="col-xs-4" style='text-align:center;'>
+          <div class="col-xs-6" style='text-align:center;'>
             <p class="navbar-text pacifico hidden-md hidden-sm visible-xs" style='font-size:25px;'>Col-Deal</p>
           </div>
-          <div class="col-xs-4" style='text-align:center;'>
-            <p class="navbar-text lato hidden-md hidden-sm visible-xs"><button class="btn btn-default button-no-glow auth-button" data-toggle="modal" data-target="#log-in-modal" style='font-size:15px !important;'>LOG IN</button></p>
+          <div class="col-xs-3" style='text-align:center;'>
+            <p class="navbar-text hidden-md hidden-sm visible-xs"><button class="btn btn-default button-no-glow auth-button" data-toggle="modal" data-target="#log-in-modal" style='font-size:15px !important;'>LOG IN</button></p>
           </div>
-          <div class="col-xs-4" style='text-align:center;'>
-            <p class="navbar-text lato hidden-md hidden-sm visible-xs"><button class="btn btn-default button-no-glow auth-button" data-toggle="modal" data-target="#sign-up-modal" style='font-size:15px !important;'>SIGN UP</button></p>
+          <div class="col-xs-3" style='text-align:center;'>
+            <p class="navbar-text hidden-md hidden-sm visible-xs"><button class="btn btn-default button-no-glow auth-button" data-toggle="modal" data-target="#sign-up-modal" style='font-size:15px !important;'>SIGN UP</button></p>
           </div>
         </div>
       </div>
@@ -40,24 +40,28 @@
     </div>
 
     <!-- LOG IN MODAL -->
-    <div class="modal fade" id="log-in-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade lato" id="log-in-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header modal-header-and-footer">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Log In To Col-Deal</h4>
+            <h1 class="modal-title" id="myModalLabel">Log In To Col-Deal</h1>
           </div>
-          <div class="modal-body">
+          <div class="modal-body log-in-modal-body">
             <form action="/login" method="POST">
-              <small>Email</small>
-              <input type="text" class="form-control form-input" name="email" placeholder="Your email here">
-              <small class='small'>Password</small>
-              <input class='form-control form-input' type="password" name="password" placeholder="Your password here">
-              <button type="submit" class="btn btn-primary">LOG IN</button>
+              <div class="create-poll-input-margin">
+                Email<br>
+                <input type="text" class="create-poll-input remove-glow" name="email" placeholder="Your email here">
+              </div>
+              <div class="create-poll-input-margin">
+                Password<br>
+                <input class='create-poll-input remove-glow' type="password" name="password" placeholder="Your password here">
+              </div>
+              <button type="submit" class="modal-auth-button remove-glow">LOG IN</button>
             </form>
           </div>
-          <div class="modal-footer">
-            NOT A MEMBER YET? SIGN UP.
+          <div class="modal-footer modal-header-and-footer">
+            NOT A MEMBER YET? <span id='sign-up-modal-toggle' class='light-blue'>SIGN UP</span>.
           </div>
         </div>
       </div>
@@ -87,28 +91,36 @@
 
     <!-- SING UP MODAL -->
 
-    <div class="modal fade" id="sign-up-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade lato" id="sign-up-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header modal-header-and-footer">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">SIGN UP FOR COL-DEAL</h4>
           </div>
-          <div class="modal-body">
+          <div class="modal-body sign-up-modal-body">
             <form action="/signup" method="POST">
-              <small class='small'>First Name</small>
-              <input id='signupFirstName' class='form-control form-input' type="text" name="firstName" placeholder="First Name">
-              <small class='small'>Last Name</small>
-              <input id='signupLastName' class='form-control form-input' type="text" name="lastName" placeholder="Last Name">
-              <small class='small'>Email</small>
-              <input id='signupEmail' class='form-control form-input' type="text" name="email" placeholder="Email">
-              <small class='small'>Password</small>
-              <input id='signupPassword' class='form-control form-input' type="password" name="password" placeholder="Password">
-              <button type="submit" class="btn btn-primary">SIGN UP</button>
+              <div class="create-poll-input-margin">
+                First Name<br>
+                <input id='signupFirstName' class='create-poll-input remove-glow' type="text" name="firstName" placeholder="First Name">
+              </div>
+              <div class="create-poll-input-margin">
+                 Last Name<br>
+                 <input id='signupLastName' class='create-poll-input remove-glow' type="text" name="lastName" placeholder="Last Name">
+              </div>
+              <div class="create-poll-input-margin">
+                 Email<br>
+                 <input id='signupEmail' class='create-poll-input remove-glow' type="text" name="email" placeholder="Email">
+              </div>
+              <div class="create-poll-input-margin">
+                 Pasword<br>
+                 <input id='signupPassword' class='create-poll-input remove-glow' type="password" name="password" placeholder="Password">
+              </div>
+              <button type="submit" class="modal-auth-button remove-glow">SIGN UP</button>
             </form>
           </div>
-          <div class="modal-footer">
-            ALREADY A MEMBER? LOG IN.
+          <div class="modal-footer modal-header-and-footer">
+            ALREADY A MEMBER? <span class='light-blue' id='log-ing-modal-toggle'>LOG IN</span>.
           </div>
         </div>
       </div>
