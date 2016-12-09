@@ -26,6 +26,11 @@
   color:#0086a5;
 }
 
+html{
+  position:relative;
+  min-height: 100%;
+}
+
 .user-icon {
   font-size: 30px !important;
   line-height: 100% !important;
@@ -253,8 +258,14 @@ progress[value]::-webkit-progress-value {
   background-color: transparent;
 }*/
 
-.footer {
+#footer {
   background-color:white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /*top: 20;*/
+  width: 100%;
 }
 
 #footer-md {
@@ -518,6 +529,7 @@ progress[value]::-webkit-progress-value {
   letter-spacing: 2px;
   border: none;
   text-align: center;
+  /*margin-top:10px;*/
 }
 
 .edit-option-button:hover {

@@ -13,23 +13,46 @@ app.use(isLoggedIn);
 
 // GET USER'S PROFILE AND LOAD ALL OF USER'S POLLS AND OPTIONS
 router.get('/profile', function(req,res) {
+  var profileResults = [];
   db.user.findOne({
     where: {id: req.user.id}
   }).then(function(user) {
-    user.getPolls({
-      include: [db.option],
-      order: [['createdAt', 'ASC']]
-    }).then(function(polls) {
-      console.log('see here for user profile', polls[0].options);
-      if (polls.length < 1) {
-        // if user has not created any post, flash this message
-        res.render('profile', {message: 'Seems like you have not created any polls yet.'})
-      } else {
-        res.render('profile', {polls: polls, message: ''})
-      }
+    user.getOptions({
+      include: [db.poll],
+      order: [['pollId', 'DESC']]
+    }).then(function(options) {
+      profileResults.push(options);
+      console.log('see here please >>>>', profileResults[0]);
+      db.poll.findAll({
+        where: { userId: req.user.id },
+        include: [db.option],
+        order: [['createdAt', 'DESC']]
+      }).then(function(polls) {
+        profileResults.push(polls);
+        if (polls.length < 1) {
+          // if user has not created any post, flash this message
+          res.render('profile', {pollMessage: 'Seems like you have not created any polls yet.'})
+        } else {
+          res.render('profile', {profileResults: profileResults, pollMessage: ''})
+        }
+      });
     });
   });
 });
+// .then(function(user) {
+//   user.getPolls({
+//     include: [db.option],
+//     order: [['createdAt', 'DESC']]
+//   }).then(function(polls) {
+//     // console.log('see here for user profile', polls[0].options);
+//     if (polls.length < 1) {
+//       // if user has not created any post, flash this message
+//       res.render('profile', {message: 'Seems like you have not created any polls yet.'})
+//     } else {
+//       res.render('profile', {polls: polls, message: ''})
+//     }
+//   });
+// });
 
 // GET form to edit option
 router.get('/options/:id/edit', function(req,res) {
