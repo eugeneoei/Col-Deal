@@ -6,10 +6,15 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist" style='text-align:center; margin-bottom:2%;'>
-    <li role="presentation" class="active col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-3"><a href="#discover" aria-controls="discover" role="tab" data-toggle="tab">DISCOVER</a></li>
+    <li role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#discover" aria-controls="discover" role="tab" data-toggle="tab">DISCOVER</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-4"><a href="#drops" aria-controls="drops" role="tab" data-toggle="tab">DROPS</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-4"><a href="#polls" aria-controls="polls" role="tab" data-toggle="tab">POLLS</a></li>
+
+    <!-- <li role="presentation" class="active col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-3"><a href="#discover" aria-controls="discover" role="tab" data-toggle="tab">DISCOVER</a></li>
     <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#drops" aria-controls="drops" role="tab" data-toggle="tab">DROPS</a></li>
     <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#talk" aria-controls="talk" role="tab" data-toggle="tab">TALK</a></li>
-    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#polls" aria-controls="polls" role="tab" data-toggle="tab">POLLS</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#polls" aria-controls="polls" role="tab" data-toggle="tab">POLLS</a></li> -->
+
   </ul>
 
 
@@ -55,6 +60,80 @@
           <% } %>
         </div>
       </div>
+
+      <div class="container-fluid" style='border-top:1px solid #e5e5e5; margin-top:10px;'></div>
+      <div class="container lato feature-container">
+        <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp <strong>Featured Poll</strong>
+      </div>
+      <% var polls = result[1] %>
+      <% var featuredPoll = polls[0] %>
+      <div class="container hidden-xs poll-div lato">
+        <!-- product name and by who start -->
+        <div class="col-md-12 col-sm-12" style='margin-bottom:2%;'>
+          <span style='font-size:25px; font-weight:bold;'><%= featuredPoll.name %></span> &nbsp <span class='grey'>- by</span> <span class='light-blue'><%= featuredPoll.user.firstName %> <%= featuredPoll.user.lastName %></span>
+        </div>
+        <!-- product name and by who end -->
+        <!-- top voted product image start -->
+        <% var options = featuredPoll.options %>
+        <% var minOptionsLength = Math.min(options.length, 3) %>
+        <div class="col-md-3 col-sm-3">
+          <img src="<%= options[0].productImageUrl %>" style='width:100%;'/>
+        </div>
+        <!-- top voted product image end -->
+        <!-- top three voted options start -->
+        <% if (minOptionsLength == 0) { %>
+          <div class="col-md-9 col-sm-9">
+            THERE ARE NO SUGGESTED OPTIONS FOR THIS POLL YET. WOULD YOU LIKE TO SUGGEST ONE?
+          </div>
+          <% } else { %>
+            <div class="col-md-9 col-sm-9">
+              <div class="col-md-12 col-sm-12" style='padding:0;'>
+                <span class='grey'>OPTIONS</span>
+              </div>
+              <% var numberOfOtherOptions = options.length - 3 %>
+              <% var totalnumberOfVotes = 0 %>
+              <% for (var j = 0; j < minOptionsLength; j++) { %>
+                <% totalnumberOfVotes += parseInt(options[j].numberOfVotes) %>
+              <% } %>
+              <% for (var j = 0; j < minOptionsLength; j++) { %>
+              <div class="col-md-12 col-sm-12" style='padding:0;'>
+                <div class="col-md-12 col-sm-12" style='padding:0;'>
+                  <div class="col-md-4 col-sm-4" style='padding:0;'>
+                    <% var rank = '' %>
+                    <% if (j === 0) { %>
+                      <% rank = '1st' %>
+                      <% } else if (j === 1) { %>
+                        <% rank = '2nd' %>
+                        <% } else { %>
+                          <% rank= '3rd' %>
+                          <% } %>
+                          <%= rank %>
+                        </div>
+                        <div class="col-md-8 col-sm-8" style='text-align:right;'>
+                          <%= options[j].numberOfVotes %> votes
+                        </div>
+                      </div>
+                      <div class="col-md-12 col-sm-12" style='padding:0;'>
+                        <%= options[j].name %>
+                      </div>
+                      <div class="col-md-12 col-sm-12" style='padding:0; margin-top:2vh;'>
+                        <!-- <progress class="progress progress-info progress-bar-info" value="<%= options[j].numberOfVotes %>" max="<%= totalnumberOfVotes %>"></progress> -->
+                        <progress style='width:100%;' value="<%= options[j].numberOfVotes %>" max="<%= totalnumberOfVotes %>"></progress>
+                      </div>
+                    </div>
+                  <% } %>
+                  <% if (options.length < 4) { %>
+                    <% // do nothing %>
+                  <% } else { %>
+                  <div class="col-md-4 col-sm-5 grey other-option-button">
+                    +<%= numberOfOtherOptions %> OTHER OPTION
+                  </div>
+                  <% } %>
+                </div>
+              <% } %>
+                <!-- top three voted options end -->
+            </div>
+
       <div class="">
         ORNAMENTAL STUFF GOES INSIDE HERE
       </div>
@@ -129,7 +208,7 @@
         <button class="btn btn-default" type="submit">START A NEW POLL</button>
       </div> -->
       <div class="container hidden-xs lato" style='padding:0;'>
-        <div class="col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-8 col-xs-3 col-xs-offset-9" style='padding:0; margin-bottom:2%;'>
+        <div class="col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-8" style='padding:0; margin-bottom:2%;'>
           <button class="new-poll-button" type="submit">START A NEW POLL</button>
         </div>
       </div>

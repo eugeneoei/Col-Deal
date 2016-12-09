@@ -9,9 +9,12 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist" id='nav-tab'>
-    <li role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#voting" aria-controls="home" role="tab" data-toggle="tab">VOTING</a></li>
+    <li role="presentation" class="active col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-4 col-xs-offset-2"><a href="#voting" aria-controls="home" role="tab" data-toggle="tab">VOTING</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-4"><a href="#results" aria-controls="profile" role="tab" data-toggle="tab">RESULTS</a></li>
+
+    <!-- <li role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#voting" aria-controls="home" role="tab" data-toggle="tab">VOTING</a></li>
     <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#results" aria-controls="profile" role="tab" data-toggle="tab">RESULTS</a></li>
-    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#discussion" aria-controls="messages" role="tab" data-toggle="tab">DISCUSSION</a></li>
+    <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-4"><a href="#discussion" aria-controls="messages" role="tab" data-toggle="tab">DISCUSSION</a></li> -->
   </ul>
 
   <!-- Tab panes -->
@@ -21,7 +24,14 @@
 
       <div class="container hidden-xs lato" style='padding:0;'>
         <a href="/home/polls">
-          <div class="col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-8 col-xs-3 col-xs-offset-9" style='padding:0; margin-bottom:2%;'>
+          <div class="col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-8" style='padding:0; margin-bottom:2%;'>
+            <button id="back-to-poll-button" class="remove-glow">BACK</button>
+          </div>
+        </a>
+      </div>
+      <div class="container hidden-md hidden-sm visible-xs lato" style='padding:0;'>
+        <a href="/home/polls">
+          <div class="col-xs-12" style='margin-bottom:2%;'>
             <button id="back-to-poll-button" class="remove-glow">BACK</button>
           </div>
         </a>
@@ -53,7 +63,7 @@
                 <% }) %>
 
                 <% if (voteStatus) { %>
-                  <button class="vote-option-button" value="<%= option.id %>" style='width:100%;'>VOTED</button>
+                  <button class="vote-option-button" id="voted" value="<%= option.id %>" style='width:100%;'>VOTED</button>
                 <% } else { %>
                   <button class="vote-option-button" value="<%= option.id %>" style='width:100%;'>VOTE</button>
                 <% } %>

@@ -11,6 +11,14 @@ $("document").ready(function(){
     $('#user-icon-dropdown-menu').hide();
   });
 
+  $('#user-icon-dropdown-menu-xs').hide();
+  $('#user-icon-dropdown-xs').on('click', function() {
+    $('#user-icon-dropdown-menu-xs').show();
+  });
+  $(document).on('click', function() {
+    $('#user-icon-dropdown-menu-xs').hide();
+  });
+
   // CREATE POLL HIDE SHOW TOGGLE
   $('#create-form-container').hide();
   $('.new-poll-button').on('click', function() {
