@@ -63,7 +63,7 @@
                 <% }) %>
 
                 <% if (voteStatus) { %>
-                  <button class="vote-option-button" id="voted" value="<%= option.id %>" style='width:100%;'>VOTED</button>
+                  <button class="vote-option-button voted" value="<%= option.id %>" style='width:100%;'>VOTED</button>
                 <% } else { %>
                   <button class="vote-option-button" value="<%= option.id %>" style='width:100%;'>VOTE</button>
                 <% } %>
@@ -178,13 +178,25 @@
 
 <script type="text/javascript">
   $('#voting').on('click', '.vote-option-button', function() {
+    // console.log($(this));
+    // console.log(this.class);
+    // console.log('add immediately');
+    // this.addClass('voted');
+    // console.log('add immediately');
     var element = this
     if (this.textContent == 'VOTE') {
       $.ajax({
         url: "/polls/options/" + this.value + "/vote",
-        method: "POST"
+        method: "POST",
+        // context: this
       }).done(function(dataFromServer) {
+        console.log('ajax success');
         element.textContent = 'VOTED';
+        $(element).addClass('voted');
+        // this.textContent = 'VOTED';
+        // this.addClass('voted');
+
+
       }).fail(function() {
         console.log('vote ajax failed');
       });
@@ -194,6 +206,8 @@
         method: "DELETE"
       }).done(function(dataFromServer) {
         element.textContent = 'VOTE';
+        $(element).removeClass('voted');
+        console.log('ajax unvote success');
       }).fail(function() {
         console.log('unvote ajax failed');
       });

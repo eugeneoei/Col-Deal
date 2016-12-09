@@ -542,8 +542,12 @@ progress[value]::-webkit-progress-value {
   transform: scale(1.1);
 }
 
-#voted {
+.voted {
   background-color: #88c100;
+}
+
+.voted:hover {
+  background-color: #88c100 !important;
 }
 
 .feature-container {
