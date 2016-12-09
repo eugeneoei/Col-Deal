@@ -56,6 +56,7 @@ $("document").ready(function(){
     $('#discover-tab').removeClass('active');
     $('#polls').addClass('active');
     $('#polls-tab').addClass('active');
+    $('html, body').animate({ scrollTop: 0 }, 500);
   })
 
 
