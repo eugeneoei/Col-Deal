@@ -550,4 +550,17 @@ progress[value]::-webkit-progress-value {
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 26px;
+  line-height: 100%;
+}
+
+#featured-poll-more {
+  text-align: right;
+  font-size: 14px;
+}
+
+#featured-poll-more:hover {
+  /*transition: all .5s ease-in-out;
+  transform: scale(1.025);*/
+  text-decoration: underline;
+  cursor: pointer;
 }

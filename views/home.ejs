@@ -6,9 +6,9 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist" style='text-align:center; margin-bottom:2%;'>
-    <li role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#discover" aria-controls="discover" role="tab" data-toggle="tab">DISCOVER</a></li>
+    <li id='discover-tab' role="presentation" class="active col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3 col-xs-4"><a href="#discover" aria-controls="discover" role="tab" data-toggle="tab">DISCOVER</a></li>
     <li role="presentation" class="col-md-2 col-sm-2 col-xs-4"><a href="#drops" aria-controls="drops" role="tab" data-toggle="tab">DROPS</a></li>
-    <li role="presentation" class="col-md-2 col-sm-2 col-xs-4"><a href="#polls" aria-controls="polls" role="tab" data-toggle="tab">POLLS</a></li>
+    <li id='polls-tab' role="presentation" class="col-md-2 col-sm-2 col-xs-4"><a href="#polls" aria-controls="polls" role="tab" data-toggle="tab">POLLS</a></li>
 
     <!-- <li role="presentation" class="active col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-3"><a href="#discover" aria-controls="discover" role="tab" data-toggle="tab">DISCOVER</a></li>
     <li role="presentation" class="col-md-2 col-sm-2 col-xs-3 col-xs-3"><a href="#drops" aria-controls="drops" role="tab" data-toggle="tab">DROPS</a></li>
@@ -62,9 +62,16 @@
       </div>
 
       <div class="container-fluid" style='border-top:1px solid #e5e5e5; margin-top:10px;'></div>
+
       <div class="container lato feature-container">
-        <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp <strong>Featured Poll</strong>
+        <div class="col-md-10 col-sm-10 col-xs-10">
+          <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp <strong>Featured Poll</strong>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-2 light-blue" id='featured-poll-more'>
+          MORE &nbsp>
+        </div>
       </div>
+      <!-- FEATURED MD & SM -->
       <% var polls = result[1] %>
       <% var featuredPoll = polls[0] %>
       <div class="container hidden-xs poll-div lato">
@@ -85,58 +92,119 @@
           <div class="col-md-9 col-sm-9">
             THERE ARE NO SUGGESTED OPTIONS FOR THIS POLL YET. WOULD YOU LIKE TO SUGGEST ONE?
           </div>
-          <% } else { %>
-            <div class="col-md-9 col-sm-9">
-              <div class="col-md-12 col-sm-12" style='padding:0;'>
-                <span class='grey'>OPTIONS</span>
-              </div>
-              <% var numberOfOtherOptions = options.length - 3 %>
-              <% var totalnumberOfVotes = 0 %>
-              <% for (var j = 0; j < minOptionsLength; j++) { %>
-                <% totalnumberOfVotes += parseInt(options[j].numberOfVotes) %>
-              <% } %>
-              <% for (var j = 0; j < minOptionsLength; j++) { %>
+        <% } else { %>
+          <div class="col-md-9 col-sm-9">
+            <div class="col-md-12 col-sm-12" style='padding:0;'>
+              <span class='grey'>OPTIONS</span>
+            </div>
+            <% var numberOfOtherOptions = options.length - 3 %>
+            <% var totalnumberOfVotes = 0 %>
+            <% for (var j = 0; j < minOptionsLength; j++) { %>
+              <% totalnumberOfVotes += parseInt(options[j].numberOfVotes) %>
+            <% } %>
+            <% for (var j = 0; j < minOptionsLength; j++) { %>
               <div class="col-md-12 col-sm-12" style='padding:0;'>
                 <div class="col-md-12 col-sm-12" style='padding:0;'>
                   <div class="col-md-4 col-sm-4" style='padding:0;'>
                     <% var rank = '' %>
                     <% if (j === 0) { %>
                       <% rank = '1st' %>
-                      <% } else if (j === 1) { %>
-                        <% rank = '2nd' %>
-                        <% } else { %>
-                          <% rank= '3rd' %>
-                          <% } %>
-                          <%= rank %>
-                        </div>
-                        <div class="col-md-8 col-sm-8" style='text-align:right;'>
-                          <%= options[j].numberOfVotes %> votes
-                        </div>
-                      </div>
-                      <div class="col-md-12 col-sm-12" style='padding:0;'>
-                        <%= options[j].name %>
-                      </div>
-                      <div class="col-md-12 col-sm-12" style='padding:0; margin-top:2vh;'>
-                        <!-- <progress class="progress progress-info progress-bar-info" value="<%= options[j].numberOfVotes %>" max="<%= totalnumberOfVotes %>"></progress> -->
-                        <progress style='width:100%;' value="<%= options[j].numberOfVotes %>" max="<%= totalnumberOfVotes %>"></progress>
-                      </div>
-                    </div>
-                  <% } %>
-                  <% if (options.length < 4) { %>
-                    <% // do nothing %>
-                  <% } else { %>
-                  <div class="col-md-4 col-sm-5 grey other-option-button">
-                    +<%= numberOfOtherOptions %> OTHER OPTION
+                    <% } else if (j === 1) { %>
+                      <% rank = '2nd' %>
+                    <% } else { %>
+                      <% rank= '3rd' %>
+                    <% } %>
+                    <%= rank %>
                   </div>
-                  <% } %>
+                  <div class="col-md-8 col-sm-8" style='text-align:right;'>
+                    <%= options[j].numberOfVotes %> votes
+                  </div>
                 </div>
-              <% } %>
-                <!-- top three voted options end -->
+                <div class="col-md-12 col-sm-12" style='padding:0;'>
+                  <%= options[j].name %>
+                </div>
+                <div class="col-md-12 col-sm-12" style='padding:0; margin-top:2vh;'>
+                  <progress style='width:100%;' value="<%= options[j].numberOfVotes %>" max="<%= totalnumberOfVotes %>"></progress>
+                </div>
+              </div>
+            <% } %>
+            <% if (options.length < 4) { %>
+              <% // do nothing %>
+            <% } else { %>
+            <div class="col-md-4 col-sm-5 grey other-option-button">
+              +<%= numberOfOtherOptions %> OTHER OPTION
             </div>
-
-      <div class="">
-        ORNAMENTAL STUFF GOES INSIDE HERE
+            <% } %>
+          </div>
+        <% } %>
+        <!-- top three voted options end -->
       </div>
+      <!-- FEATURED MD & SM END -->
+
+      <!-- FEATURED XS START -->
+      <% var pollsXS = result[1] %>
+      <% var featuredPollXS = pollsXS[0] %>
+      <div class="container hidden-md hidden-sm visible-xs poll-div lato" style='margin:4% 2%;'>
+        <div class="col-xs-12" style='margin-bottom:2%;'>
+          <span style='font-size:25px; font-weight:bold;'><%= featuredPollXS.name %></span> &nbsp <span class='grey'>- by</span> <span class='light-blue'><%= featuredPollXS.user.firstName %> <%= featuredPollXS.user.lastName %></span>
+        </div>
+        <% var optionsXS = featuredPollXS.options %>
+        <% var minOptionsLengthXS = Math.min(optionsXS.length, 3) %>
+
+        <div class="col-xs-12">
+          <img src="<%= optionsXS[0].productImageUrl %>" style='width:100%;'/>
+        </div>
+
+        <% if (minOptionsLengthXS == 0) { %>
+          <div class="col-xs-12">
+            THERE ARE NO SUGGESTED OPTIONS FOR THIS POLL YET. WOULD YOU LIKE TO SUGGEST ONE?
+          </div>
+        <% } else { %>
+          <div class="col-xs-12" style='padding:0;'>
+            <span class='grey'>OPTIONS</span>
+          </div>
+          <% var numberOfOtherOptionsXS = optionsXS.length - 3 %>
+          <% var totalnumberOfVotesXS = 0 %>
+          <% for (var k = 0; k < minOptionsLengthXS; k++) { %>
+            <% totalnumberOfVotesXS += parseInt(optionsXS[k].numberOfVotes) %>
+          <% } %>
+          <% for (var k = 0; k < minOptionsLengthXS; k++) { %>
+            <div class="col-xs-12" style='padding:0;'>
+              <div class="col-xs-4" style='padding:0;'>
+                <% var rank = '' %>
+                <% if (k === 0) { %>
+                  <% rank = '1st' %>
+                <% } else if (k === 1) { %>
+                    <% rank = '2nd' %>
+                <% } else { %>
+                  <% rank= '3rd' %>
+                <% } %>
+                <%= rank %>
+              </div>
+              <div class="col-xs-8" style='text-align:right'>
+                <%= optionsXS[k].numberOfVotes %> votes
+              </div>
+              <div class="col-xs-12" style='padding:0;'>
+                <%= optionsXS[k].name %>
+              </div>
+              <div class="col-xs-12" style='padding:0;'>
+                <progress value="<%= optionsXS[k].numberOfVotes %>" max="<%= totalnumberOfVotesXS %>"></progress>
+              </div>
+            </div>
+          <% } %>
+          <% if (optionsXS.length < 4) { %>
+            <% // do nothing %>
+          <% } else { %>
+            <div class="col-xs-12 grey other-option-button">
+              +<%= numberOfOtherOptionsXS %> OTHER OPTIONS
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <!-- FETURED XS ENDS -->
+      <!-- <div class="">
+        ORNAMENTAL STUFF GOES INSIDE HERE
+      </div> -->
     </div>
     <!-- DISCOVER ENDS -->
 
@@ -335,7 +403,7 @@
                             <%= rank %>
                           </div>
                           <div class="col-xs-8" style='text-align:right'>
-                            <%= optionsXS[k].numberOfVotes %> numberOfVotes
+                            <%= optionsXS[k].numberOfVotes %> votes
                           </div>
                           <div class="col-xs-12" style='padding:0;'>
                             <%= optionsXS[k].name %>

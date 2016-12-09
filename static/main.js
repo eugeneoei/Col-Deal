@@ -50,7 +50,13 @@ $("document").ready(function(){
     // $('#back-option').hide();
   });
 
-
+  // FEATURED POLL MORE DIV
+  $('#featured-poll-more').on('click', function() {
+    $('#discover').removeClass('active');
+    $('#discover-tab').removeClass('active');
+    $('#polls').addClass('active');
+    $('#polls-tab').addClass('active');
+  })
 
 
 
