@@ -29,11 +29,27 @@
               </div>
               <div class="caption">
                 <div style='height:15vh;'>
-                  <span style='font-size:20px; font-weight:bold;'><%= option.name %></span>
+                  <span style='font-size:18px; font-weight:bold;'><%= option.name %></span>
                 </div>
                 <a href='<%= option.productUrl %>'><span class='view-website grey'>VIEW WEBSITE</span></a>
                 <p><span class='grey'>by </span><span class='light-blue'><%= option.user.firstName %> <%= option.user.lastName %></span></p>
-                <button class="vote-option-button" value="<%= option.id %>" style='width:100%;'>VOTE</button>
+
+                <% var voteStatus = false; %>
+                <% var votes = option.votes %>
+                <% votes.forEach(function(vote) { %>
+                  <% if (vote.userId == currentUser.id && vote.optionId === option.id) { %>
+                    <% voteStatus = true; %>
+                  <% } else { %>
+                    <% // do nothing %>
+                  <% } %>
+                <% }) %>
+
+                <% if (voteStatus) { %>
+                  <button class="vote-option-button" value="<%= option.id %>" style='width:100%;'>VOTED</button>
+                <% } else { %>
+                  <button class="vote-option-button" value="<%= option.id %>" style='width:100%;'>VOTE</button>
+                <% } %>
+
               </div>
             </div>
           </div>
@@ -144,35 +160,25 @@
 
 <script type="text/javascript">
   $('#voting').on('click', '.vote-option-button', function() {
-    console.log(this.textContent);
-    console.log(this.value);
     var element = this
     if (this.textContent == 'VOTE') {
-      console.log('hello');
       $.ajax({
         url: "/polls/options/" + this.value + "/vote",
         method: "POST"
       }).done(function(dataFromServer) {
-        console.log(dataFromServer.message);
         element.textContent = 'VOTED';
-        console.log(element.textContent);
       }).fail(function() {
         console.log('vote ajax failed');
       });
     } else if (this.textContent == 'VOTED') {
-      console.log('voted to vote');
       $.ajax({
         url: "/polls/options/" + this.value + "/vote",
         method: "DELETE"
       }).done(function(dataFromServer) {
-        console.log(dataFromServer.message);
         element.textContent = 'VOTE';
-        console.log(element.textContent);
       }).fail(function() {
         console.log('unvote ajax failed');
       });
     }
-
-
   });
 </script>

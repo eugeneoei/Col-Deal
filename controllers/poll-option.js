@@ -85,9 +85,9 @@ router.get('/polls/:id', function(req,res) {
     include: [db.user]
   }).then(function(poll) {
     pollResult.push(poll);
-    poll.getOptions({include: [db.user]}).then(function(options) {
+    poll.getOptions({include: [db.user, db.vote]}).then(function(options) {
       pollResult.push(options);
-      // console.log('see here for one poll with all its options', options);
+      console.log('see here for one poll with all its options', options);
       db.community.findAll().then(function(communities) {
         pollResult.push(communities)
         res.render('polls/poll_details', {pollResult:pollResult});
