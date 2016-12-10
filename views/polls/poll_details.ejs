@@ -118,7 +118,11 @@
               <progress value="<%= optionResult.numberOfVotes %>" max="<%= highestnumberOfVotes %>"></progress>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12" style='text-align:right;'>
-              <%= optionResult.numberOfVotes %> votes
+              <% if (optionResult.numberOfVotes > 1) { %>
+                <span id='optionVoteId-<%= optionResult.id %>'><%= optionResult.numberOfVotes %></span> votes
+              <% } else { %>
+                <span><%= optionResult.numberOfVotes %></span> vote
+              <% } %>
             </div>
           </div>
         </div>
@@ -178,36 +182,37 @@
 
 <script type="text/javascript">
   $('#voting').on('click', '.vote-option-button', function() {
-    // console.log($(this));
-    // console.log(this.class);
-    // console.log('add immediately');
-    // this.addClass('voted');
-    // console.log('add immediately');
     var element = this
+    var value = this.value
     if (this.textContent == 'VOTE') {
       $.ajax({
-        url: "/polls/options/" + this.value + "/vote",
+        url: "/polls/options/" + value + "/vote",
         method: "POST",
         // context: this
       }).done(function(dataFromServer) {
-        console.log('ajax success');
+        // console.log('ajax success');
         element.textContent = 'VOTED';
+        var newVote;
+        // console.log('changing vote value');
+        newVote = parseInt(document.getElementById('optionVoteId-20').textContent) + 1
+        document.getElementById('optionVoteId-20').textContent = newVote.toString();
+        // console.log('change vote value success');
         $(element).addClass('voted');
-        // this.textContent = 'VOTED';
-        // this.addClass('voted');
-
-
+        // console.log('voted class added');
       }).fail(function() {
         console.log('vote ajax failed');
       });
     } else if (this.textContent == 'VOTED') {
       $.ajax({
-        url: "/polls/options/" + this.value + "/vote",
+        url: "/polls/options/" + value + "/vote",
         method: "DELETE"
       }).done(function(dataFromServer) {
         element.textContent = 'VOTE';
+        var newVote;
+        newVote = parseInt(document.getElementById('optionVoteId-20').textContent) - 1
+        document.getElementById('optionVoteId-20').textContent = newVote.toString();
         $(element).removeClass('voted');
-        console.log('ajax unvote success');
+        // console.log('ajax unvote success');
       }).fail(function() {
         console.log('unvote ajax failed');
       });
