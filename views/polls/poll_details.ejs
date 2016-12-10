@@ -194,8 +194,8 @@
         element.textContent = 'VOTED';
         var newVote;
         // console.log('changing vote value');
-        newVote = parseInt(document.getElementById('optionVoteId-20').textContent) + 1
-        document.getElementById('optionVoteId-20').textContent = newVote.toString();
+        newVote = parseInt(document.getElementById('optionVoteId-' + value).textContent) + 1
+        document.getElementById('optionVoteId-' + value).textContent = newVote.toString();
         // console.log('change vote value success');
         $(element).addClass('voted');
         // console.log('voted class added');
@@ -209,8 +209,8 @@
       }).done(function(dataFromServer) {
         element.textContent = 'VOTE';
         var newVote;
-        newVote = parseInt(document.getElementById('optionVoteId-20').textContent) - 1
-        document.getElementById('optionVoteId-20').textContent = newVote.toString();
+        newVote = parseInt(document.getElementById('optionVoteId-' + value).textContent) - 1
+        document.getElementById('optionVoteId-' + value).textContent = newVote.toString();
         $(element).removeClass('voted');
         // console.log('ajax unvote success');
       }).fail(function() {
