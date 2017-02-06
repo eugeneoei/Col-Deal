@@ -55,6 +55,9 @@ app.use(ejsLayouts);
 // any routes after this requires authorization
 app.use(isLoggedIn);
 
+// need to include errror endling in each reaquet
+// ie .catch after the end of .then
+
 app.get('/home', function(req,res) {
   var result = [];
   db.drop.findAll({

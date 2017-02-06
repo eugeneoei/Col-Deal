@@ -83,6 +83,7 @@ router.put('/options/:id', function(req,res) {
 });
 
 // CREATE new option
+// need to create entry in votes table for userId and optionId pair
 router.post('/options', function(req,res) {
   db.user.findOne({
     where : { id:req.user.id }
