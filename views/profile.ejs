@@ -61,19 +61,24 @@
                   <div class="thumbnail">
                     <img src="<%= option.productImageUrl %>" alt="..." style='height:50vh; width:100%;'>
                     <div class="caption">
-                      <div style='height:15vh;'>
+                      <!-- <div style='height:15vh;'> -->
+                      <div style='height:70px;'>
                         <span style='font-size:20px; font-weight:bold;'><%= option.name %></span>
                       </div>
                       <a href='<%= option.productUrl %>'><p><span class='view-website grey'>VIEW PRODUCT URL</span></a></p>
                       <% if (option.productDescription) { %>
-                        <p style='height:20vh;'><%= option.productDescription %></p>
+                        <!-- <p style='height:20vh;'><%= option.productDescription %></p> -->
+                        <p style='height:90px;'><%= option.productDescription %></p>
                       <% } else { %>
-                        <p style='height:20vh;'>There are no descripton for this option at the moment.</p>
+                        <!-- <p style='height:20vh;'>There are no descripton for this option at the moment.</p> -->
+                        <p style='height:90px;'>There are no descripton for this option at the moment.</p>
                       <% } %>
                       <% if (option.productRetailsPrice) { %>
-                        <p style='height:10vh;'><%= option.productRetailsPrice %></p>
+                        <!-- <p style='height:10vh;'><%= option.productRetailsPrice %></p> -->
+                        <p style='height:50px;'><%= option.productRetailsPrice %></p>
                       <% } else { %>
-                        <p style='height:10vh;'>There are no price stated for this option at the moment.</p>
+                        <!-- <p style='height:10vh;'>There are no price stated for this option at the moment.</p> -->
+                        <p style='height:50px;'>There are no price stated for this option at the moment.</p>
                       <% } %>
                         <button class="edit-option-button remove-glow" value='<%= option.id %>'>EDIT OPTION</button>
                     </div>
@@ -117,19 +122,24 @@
                   <div class="thumbnail">
                     <img src="<%= options[i].productImageUrl %>" alt="..." style='height:50vh; width:100%;'>
                     <div class="caption">
-                      <div style='height:15vh;'>
+                      <!-- <div style='height:15vh;'> -->
+                      <div style='height:70px;'>
                         <span style='font-size:20px; font-weight:bold;'><%= options[i].name %></span>
                       </div>
                       <a href='<%= options[i].productUrl %>'><p><span class='view-website grey'>VIEW PRODUCT URL</span></a></p>
                       <% if (options[i].productDescription) { %>
-                        <p style='height:20vh;'><%= options[i].productDescription %></p>
+                        <!-- <p style='height:20vh;'><%= options[i].productDescription %></p> -->
+                        <p style='height:90px;'><%= options[i].productDescription %></p>
                       <% } else { %>
-                        <p style='height:20vh;'>There are no descripton for this option at the moment.</p>
+                        <!-- <p style='height:20vh;'>There are no descripton for this option at the moment.</p> -->
+                        <p style='height:90px;'>There are no descripton for this option at the moment.</p>
                       <% } %>
                       <% if (options[i].productRetailsPrice) { %>
-                        <p style='height:10vh;'><%= options[i].productRetailsPrice %></p>
+                        <!-- <p style='height:10vh;'><%= options[i].productRetailsPrice %></p> -->
+                        <p style='height:50px;'><%= options[i].productRetailsPrice %></p>
                       <% } else { %>
-                        <p style='height:10vh;'>There are no price stated for this option at the moment.</p>
+                        <!-- <p style='height:10vh;'>There are no price stated for this option at the moment.</p> -->
+                        <p style='height:50px;'>There are no price stated for this option at the moment.</p>
                       <% } %>
                       <button class="edit-option-button remove-glow" value='<%= options[i].id %>'>EDIT OPTION</button>
                     </div>
@@ -142,14 +152,18 @@
                 var productDescription;
                 var productRetailsPrice;
                 if (option.productDescription) {
-                  productDescription = '<p style="height:20vh;">' + option.productDescription + '</p>'
+                  // productDescription = '<p style="height:20vh;">' + option.productDescription + '</p>'
+                  productDescription = '<p style="height:90px;">' + option.productDescription + '</p>'
                 } else {
-                  productDescription = '<p style="height:20vh;">There are no descripton for this option at the moment.</p>'
+                  // productDescription = '<p style="height:20vh;">There are no descripton for this option at the moment.</p>'
+                  productDescription = '<p style="height:90px;">There are no descripton for this option at the moment.</p>'
                 }
                 if (option.productRetailsPrice) {
-                  productRetailsPrice = '<p style="height:10vh;">' + option.productRetailsPrice + '</p>'
+                  // productRetailsPrice = '<p style="height:10vh;">' + option.productRetailsPrice + '</p>'
+                  productRetailsPrice = '<p style="height:50px;">' + option.productRetailsPrice + '</p>'
                 } else {
-                  productRetailsPrice = '<p style="height:10vh;">There are no price stated for this option at the moment.</p>'
+                  // productRetailsPrice = '<p style="height:10vh;">There are no price stated for this option at the moment.</p>'
+                  productRetailsPrice = '<p style="height:50px;">There are no price stated for this option at the moment.</p>'
                 }
 
                 $('#special-id-' + option.poll.id).append(
@@ -157,7 +171,8 @@
                     '<div class="thumbnail">' +
                       '<img src="' + option.productImageUrl + '" alt="..." style="height:50vh; width:100%;">' +
                       '<div class="caption">' +
-                        '<div style="height:15vh;">' +
+                        // '<div style="height:15vh;">' +
+                        '<div style="height:70px;">' +
                           '<span style="font-size:20px; font-weight:bold;">' + option.name + '</span>' +
                         '</div>' +
                         '<a href="' + option.productUrl  + '"><p><span class="view-website grey">VIEW PRODUCT URL</span></a></p>' +
@@ -176,19 +191,24 @@
                   <div class="thumbnail">
                     <img src="<%= options[i].productImageUrl %>" alt="..." style='height:50vh; width:100%;'>
                     <div class="caption">
-                      <div style='height:15vh;'>
+                      <!-- <div style='height:15vh;'> -->
+                      <div style='height:70px;'>
                         <span style='font-size:20px; font-weight:bold;'><%= options[i].name %></span>
                       </div>
                       <a href='<%= options[i].productUrl %>'><p><span class='view-website grey'>VIEW PRODUCT URL</span></a></p>
                       <% if (options[i].productDescription) { %>
-                        <p style='height:20vh;'><%= options[i].productDescription %></p>
+                        <!-- <p style='height:20vh;'><%= options[i].productDescription %></p> -->
+                        <p style='height:90px;'><%= options[i].productDescription %></p>
                       <% } else { %>
-                        <p style='height:20vh;'>There are no descripton for this option at the moment.</p>
+                        <!-- <p style='height:20vh;'>There are no descripton for this option at the moment.</p> -->
+                        <p style='height:90px;'>There are no descripton for this option at the moment.</p>
                       <% } %>
                       <% if (options[i].productRetailsPrice) { %>
-                        <p style='height:10vh;'><%= options[i].productRetailsPrice %></p>
+                        <!-- <p style='height:10vh;'><%= options[i].productRetailsPrice %></p> -->
+                        <p style='height:50px;'><%= options[i].productRetailsPrice %></p>
                       <% } else { %>
-                        <p style='height:10vh;'>There are no price stated for this option at the moment.</p>
+                        <!-- <p style='height:10vh;'>There are no price stated for this option at the moment.</p> -->
+                        <p style='height:50px;'>There are no price stated for this option at the moment.</p>
                       <% } %>
                         <button class="edit-option-button remove-glow" value='<%= options[i].id %>'>EDIT OPTION</button>
                     </div>
